@@ -1,18 +1,20 @@
-import { useState } from "react";
-import { CardProps } from "../../components/Card/Card";
-import OfferList from "../../components/OfferList/OfferList";
+import { useState } from 'react';
+import { CardProps } from '../../components/Card/Card';
+import OfferList from '../../components/OfferList/OfferList';
 
 type FavoritesPageProps = {
   listOfOffers: CardProps[];
 };
 
 function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState<CardProps | null>(null);
-  
+  // TODO add activeCard back as soon as you start using it
+  // const [activeCard, setActiveCard] = useState<CardProps | null>(null);
+  const [, setActiveCard] = useState<CardProps | null>(null);
+
   function onOfferHover(hoveredCard: CardProps | null): void {
     setActiveCard(hoveredCard);
   }
-  
+
   return (
     <div className="page">
       <header className="header">
@@ -58,7 +60,7 @@ function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
+                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
                 </div>
               </li>
 
@@ -71,7 +73,7 @@ function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
+                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
                 </div>
               </li>
             </ul>

@@ -1,4 +1,4 @@
-import ReviewForm from "../../components/ReviewForm/ReviewForm";
+import ReviewForm from '../../components/ReviewForm/ReviewForm';
 
 function OfferPage(): JSX.Element {
   return (

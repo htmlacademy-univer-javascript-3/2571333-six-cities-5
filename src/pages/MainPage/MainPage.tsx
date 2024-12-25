@@ -8,7 +8,9 @@ type MainPageProps = {
 };
 
 function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState<CardProps | null>(null);
+  // TODO add activeCard back as soon as you start using it
+  // const [activeCard, setActiveCard] = useState<CardProps | null>(null);
+  const [, setActiveCard] = useState<CardProps | null>(null);
 
   const slicedListOfOffers: CardProps[] = listOfOffers.slice(0, numberOfOffers);
 
