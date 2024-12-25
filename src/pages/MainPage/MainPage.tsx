@@ -1,11 +1,23 @@
-import Card from '../../components/Card/Card';
-import { CardsOffersList } from '../../components/Card/util/CardsOffersList';
+import { useState } from 'react';
+import { CardProps } from '../../components/Card/Card';
+import OfferList from '../../components/OfferList/OfferList';
 
 type MainPageProps = {
   numberOfOffers: number;
+  listOfOffers: CardProps[];
 };
 
-function MainPage({ numberOfOffers }: MainPageProps): JSX.Element {
+function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element {
+  // TODO add activeCard back as soon as you start using it
+  // const [activeCard, setActiveCard] = useState<CardProps | null>(null);
+  const [, setActiveCard] = useState<CardProps | null>(null);
+
+  const slicedListOfOffers: CardProps[] = listOfOffers.slice(0, numberOfOffers);
+
+  function onOfferHover(hoveredCard: CardProps | null): void {
+    setActiveCard(hoveredCard);
+  }
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -95,25 +107,7 @@ function MainPage({ numberOfOffers }: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-
-                {
-                  CardsOffersList.slice(0, numberOfOffers).map((card) => (
-                    <Card
-                      key={card.id}
-                      id={card.id}
-                      title={card.title}
-                      type={card.type}
-                      image={card.image}
-                      price={card.price}
-                      raitingScore={card.raitingScore}
-                      isPremium={card.isPremium}
-                      isBookmarked={card.isBookmarked}
-                    />
-                  ))
-                }
-
-              </div>
+              <OfferList listOfOffers={slicedListOfOffers} onOfferHover={onOfferHover} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
