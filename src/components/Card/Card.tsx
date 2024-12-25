@@ -1,15 +1,17 @@
+import { Link } from 'react-router-dom';
+
 export type CardProps = {
   id: number;
   title: string;
   type: string;
-  image: string;
+  previewImage: string;
   price: number;
-  raitingScore: number;
+  rating: number;
   isPremium: boolean;
-  isBookmarked: boolean;
+  isFavorite: boolean;
 }
 
-function Card({ id, title, type, image, price, raitingScore, isPremium, isBookmarked }: CardProps): JSX.Element {
+function Card({ id, title, type, previewImage, price, rating, isPremium, isFavorite }: CardProps): JSX.Element {
   return (
     <article id={id.toString()} className="cities__card place-card">
 
@@ -20,9 +22,9 @@ function Card({ id, title, type, image, price, raitingScore, isPremium, isBookma
         : null}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
-        </a>
+        <Link to={`/offer/${id}`}>{title}
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -31,7 +33,7 @@ function Card({ id, title, type, image, price, raitingScore, isPremium, isBookma
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          {isBookmarked ?
+          {isFavorite ?
             <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
@@ -49,12 +51,12 @@ function Card({ id, title, type, image, price, raitingScore, isPremium, isBookma
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ 'width': `${raitingScore}%` }}></span>
+            <span style={{ 'width': `${rating}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
