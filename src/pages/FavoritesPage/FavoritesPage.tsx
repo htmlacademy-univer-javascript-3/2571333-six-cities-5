@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { CardProps } from '../../components/Card/Card';
 import OfferList from '../../components/OfferList/OfferList';
+import { CardProps } from '../../recources/Types';
 
 type FavoritesPageProps = {
   listOfOffers: CardProps[];
@@ -8,10 +8,10 @@ type FavoritesPageProps = {
 
 function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
   // TODO add activeCard back as soon as you start using it
-  // const [activeCard, setActiveCard] = useState<CardProps | null>(null);
-  const [, setActiveCard] = useState<CardProps | null>(null);
+  // const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
+  const [, setActiveCard] = useState<CardProps | undefined>(undefined);
 
-  function onOfferHover(hoveredCard: CardProps | null): void {
+  function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
   }
 

@@ -1,4 +1,5 @@
-import { CardProps } from '../components/Card/Card';
+import { CardProps } from '../recources/Types';
+
 
 export const offers: CardProps[] = [
   {
@@ -9,7 +10,11 @@ export const offers: CardProps[] = [
     price: 120,
     rating: 80,
     isPremium: true,
-    isFavorite: false
+    isFavorite: false,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 2,
@@ -19,7 +24,11 @@ export const offers: CardProps[] = [
     price: 80,
     rating: 80,
     isPremium: false,
-    isFavorite: true
+    isFavorite: true,
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 3,
@@ -29,7 +38,11 @@ export const offers: CardProps[] = [
     price: 132,
     rating: 80,
     isPremium: false,
-    isFavorite: false
+    isFavorite: false,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198
+    }
   },
   {
     id: 4,
@@ -39,6 +52,10 @@ export const offers: CardProps[] = [
     price: 180,
     rating: 100,
     isPremium: true,
-    isFavorite: false
+    isFavorite: false,
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198
+    }
   }
 ];
