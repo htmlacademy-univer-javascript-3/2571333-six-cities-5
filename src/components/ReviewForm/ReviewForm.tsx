@@ -2,14 +2,12 @@ import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 export type ReviewFormState = {
-    comment: string;
-    numberOfStars: number;
+  comment: string;
+  numberOfStars: number;
 }
 
 function ReviewForm(): JSX.Element {
   const [savedReview, setSavedReview] = useState<ReviewFormState | null>(null);
-  // const starsList: number[] = [1, 2, 3, 4, 5];
-  // const starsMeanings: string[] = ["terrible", "badly", "not bad", "good", "perfect"];
   const starsList: number[] = [5, 4, 3, 2, 1];
   const starsMeanings: string[] = ['perfect', 'good', 'not bad', 'badly', 'terrible'];
 
@@ -36,10 +34,6 @@ function ReviewForm(): JSX.Element {
     }
   }
 
-  //   useEffect(() => {
-  //     console.log('form', savedReview);
-  //   }, [savedReview]);
-
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -62,7 +56,7 @@ function ReviewForm(): JSX.Element {
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={SaveReviewState} />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-                    To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={savedReview === null || savedReview !== null && savedReview?.comment.length < 50 || savedReview?.numberOfStars === 0}>Submit</button>
       </div>

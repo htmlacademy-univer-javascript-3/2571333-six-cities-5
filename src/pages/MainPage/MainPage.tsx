@@ -10,9 +10,7 @@ type MainPageProps = {
 };
 
 function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element {
-  // TODO add activeCard back as soon as you start using it
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
-  // const [, setActiveCard] = useState<CardProps | null>(null);
 
   const slicedListOfOffers: CardProps[] = listOfOffers.slice(0, numberOfOffers);
   const currrentCity = CITIES.Amsterdam;
@@ -110,7 +108,7 @@ function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element 
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList listOfOffers={slicedListOfOffers} onOfferHover={onOfferHover} />
+              <OfferList listOfOffers={slicedListOfOffers} onOfferHover={onOfferHover}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
