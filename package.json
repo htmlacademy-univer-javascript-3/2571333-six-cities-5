@@ -8,7 +8,8 @@
     "lint": "eslint src --ext ts,tsx",
     "fix": "eslint src --ext ts,tsx --fix",
     "preview": "vite preview",
-    "test": "vitest --passWithNoTests"
+    "test": "vitest --passWithNoTests",
+    "check": "npm run build && npm run fix"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.9.7",
