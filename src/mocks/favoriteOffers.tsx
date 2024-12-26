@@ -1,4 +1,4 @@
-import { CardProps } from "../recources/Types";
+import { CardProps } from '../recources/Types';
 
 export const favoriteOffers: CardProps[] = [
   {
