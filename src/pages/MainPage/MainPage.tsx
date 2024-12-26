@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { CardProps } from '../../components/Card/Card';
 import OfferList from '../../components/OfferList/OfferList';
+import Map from '../../components/Map/Map';
+import { CITIES } from '../../recources/Cities';
+import { CardProps } from '../../recources/Types';
 
 type MainPageProps = {
   numberOfOffers: number;
@@ -9,12 +11,13 @@ type MainPageProps = {
 
 function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element {
   // TODO add activeCard back as soon as you start using it
-  // const [activeCard, setActiveCard] = useState<CardProps | null>(null);
-  const [, setActiveCard] = useState<CardProps | null>(null);
+  const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
+  // const [, setActiveCard] = useState<CardProps | null>(null);
 
   const slicedListOfOffers: CardProps[] = listOfOffers.slice(0, numberOfOffers);
+  const currrentCity = CITIES.Amsterdam;
 
-  function onOfferHover(hoveredCard: CardProps | null): void {
+  function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
   }
 
@@ -110,7 +113,9 @@ function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element 
               <OfferList listOfOffers={slicedListOfOffers} onOfferHover={onOfferHover} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={currrentCity} points={slicedListOfOffers} selectedPoint={activeCard}/>
+              </section>
             </div>
           </div>
         </div>

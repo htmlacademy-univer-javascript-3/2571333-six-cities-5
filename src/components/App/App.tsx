@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../recources/Routes.ts';
 import PrivateRoute from '../PrivateRoute/PrivateRoute.tsx';
-import { CardProps } from '../Card/Card.tsx';
 
 import MainPage from '../../pages/MainPage/MainPage.tsx';
 import LoginPage from '../../pages/LoginPage/LoginPage.tsx';
 import OfferPage from '../../pages/OfferPage/Offer.tsx';
 import FavoritesPage from '../../pages/FavoritesPage/FavoritesPage.tsx';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.tsx';
+import { CardProps } from '../../recources/Types.ts';
 
 
 type AppProps = {

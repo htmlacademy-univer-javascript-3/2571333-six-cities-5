@@ -1,8 +1,10 @@
-import Card, { CardProps } from '../Card/Card';
+import { CardProps } from '../../recources/Types';
+import Card from '../Card/Card';
+
 
 export type OfferListProps = {
     listOfOffers: CardProps[];
-    onOfferHover: (hoveredCard: CardProps | null) => void;
+    onOfferHover: (hoveredCard: CardProps | undefined) => void;
 }
 
 function OfferList({ listOfOffers, onOfferHover }: OfferListProps): JSX.Element {
@@ -12,7 +14,7 @@ function OfferList({ listOfOffers, onOfferHover }: OfferListProps): JSX.Element 
         listOfOffers.map((card) => (
           <div
             onMouseOver={() => onOfferHover(card)}
-            onMouseLeave={() => onOfferHover(null)}
+            onMouseLeave={() => onOfferHover(undefined)}
             key={card.id}
           >
             <Card
@@ -24,6 +26,7 @@ function OfferList({ listOfOffers, onOfferHover }: OfferListProps): JSX.Element 
               rating={card.rating}
               isPremium={card.isPremium}
               isFavorite={card.isFavorite}
+              location={card.location}
             />
           </div>
         ))

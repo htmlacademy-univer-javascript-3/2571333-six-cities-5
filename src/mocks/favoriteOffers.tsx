@@ -1,4 +1,4 @@
-import { CardProps } from '../components/Card/Card';
+import { CardProps } from '../recources/Types';
 
 export const favoriteOffers: CardProps[] = [
   {
@@ -9,7 +9,11 @@ export const favoriteOffers: CardProps[] = [
     price: 120,
     rating: 80,
     isPremium: true,
-    isFavorite: false
+    isFavorite: false,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 4,
@@ -19,6 +23,10 @@ export const favoriteOffers: CardProps[] = [
     price: 180,
     rating: 100,
     isPremium: true,
-    isFavorite: false
+    isFavorite: false,
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198
+    }
   }
 ];

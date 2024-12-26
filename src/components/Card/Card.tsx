@@ -1,15 +1,5 @@
 import { Link } from 'react-router-dom';
-
-export type CardProps = {
-  id: number;
-  title: string;
-  type: string;
-  previewImage: string;
-  price: number;
-  rating: number;
-  isPremium: boolean;
-  isFavorite: boolean;
-}
+import { CardProps } from '../../recources/Types';
 
 function Card({ id, title, type, previewImage, price, rating, isPremium, isFavorite }: CardProps): JSX.Element {
   return (
