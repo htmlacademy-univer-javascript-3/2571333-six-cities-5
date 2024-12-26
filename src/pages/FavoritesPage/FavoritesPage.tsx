@@ -60,7 +60,7 @@ function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
+                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover}/>
                 </div>
               </li>
 
@@ -73,7 +73,7 @@ function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
+                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover}/>
                 </div>
               </li>
             </ul>

@@ -4,7 +4,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute.tsx';
 
 import MainPage from '../../pages/MainPage/MainPage.tsx';
 import LoginPage from '../../pages/LoginPage/LoginPage.tsx';
-import OfferPage from '../../pages/OfferPage/Offer.tsx';
+import OfferPage, { OfferPageProps } from '../../pages/OfferPage/OfferPage.tsx';
 import FavoritesPage from '../../pages/FavoritesPage/FavoritesPage.tsx';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.tsx';
 import { CardProps } from '../../recources/Types.ts';
@@ -14,19 +14,21 @@ type AppProps = {
   numberOfOffers: number;
   listOfOffers: CardProps[];
   listOfFavoriteOffers: CardProps[];
+  offersProps: OfferPageProps[];
 };
 
-function App({ numberOfOffers, listOfOffers, listOfFavoriteOffers }: AppProps): JSX.Element {
+function App({ numberOfOffers, listOfOffers, listOfFavoriteOffers, offersProps }: AppProps): JSX.Element {
   const isAuth = false;
+  const tempFirstOfferProps: OfferPageProps = offersProps[0];
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={<MainPage numberOfOffers={numberOfOffers} listOfOffers={listOfOffers} />} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route path={AppRoute.Offer} element={<OfferPage />} />
+        <Route path={AppRoute.Offer} element={<OfferPage {...tempFirstOfferProps} />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute isAuthorized={isAuth}>
-            <FavoritesPage listOfOffers={listOfFavoriteOffers}/>
+            <FavoritesPage listOfOffers={listOfFavoriteOffers} />
           </PrivateRoute>
 
         }

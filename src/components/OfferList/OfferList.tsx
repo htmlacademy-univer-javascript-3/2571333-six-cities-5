@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { CardProps } from '../../recources/Types';
 import Card from '../Card/Card';
 
@@ -5,11 +6,12 @@ import Card from '../Card/Card';
 export type OfferListProps = {
     listOfOffers: CardProps[];
     onOfferHover: (hoveredCard: CardProps | undefined) => void;
+    isNearPlaces?: boolean;
 }
 
-function OfferList({ listOfOffers, onOfferHover }: OfferListProps): JSX.Element {
+function OfferList({ listOfOffers, onOfferHover, isNearPlaces = false}: OfferListProps): JSX.Element {
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={classNames(isNearPlaces ? 'near-places__list' : 'cities__places-list', 'places__list', !isNearPlaces && 'tabs__content')}>
       {
         listOfOffers.map((card) => (
           <div
@@ -27,6 +29,7 @@ function OfferList({ listOfOffers, onOfferHover }: OfferListProps): JSX.Element 
               isPremium={card.isPremium}
               isFavorite={card.isFavorite}
               location={card.location}
+              isNearPlaces={isNearPlaces}
             />
           </div>
         ))

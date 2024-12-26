@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { CardProps } from '../../recources/Types';
+import classNames from 'classnames';
 
-function Card({ id, title, type, previewImage, price, rating, isPremium, isFavorite }: CardProps): JSX.Element {
+function Card({ id, title, type, previewImage, price, rating, isPremium, isFavorite, isNearPlaces }: CardProps): JSX.Element {
   return (
-    <article id={id.toString()} className="cities__card place-card">
+    <article id={id.toString()} className={classNames(isNearPlaces ? 'near-places__card' : 'cities__card', 'place-card')}>
 
       {isPremium ?
         <div className="place-card__mark">
@@ -11,8 +12,8 @@ function Card({ id, title, type, previewImage, price, rating, isPremium, isFavor
         </div>
         : null}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${id}`}>{title}
+      <div className={classNames(isNearPlaces ? 'near-places__image-wrapper' : 'cities__image-wrapper', 'place-card__image-wrapper')}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>

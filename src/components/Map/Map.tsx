@@ -17,8 +17,8 @@ export type City = {
 type MapProps = {
     city: City;
     points: CardProps[];
-    selectedPoint: CardProps | undefined;
-  };
+    selectedPoint?: CardProps;
+};
 
 const defaultCustomIcon = new Icon({
   iconUrl: '../../../markup/img/pin.svg',
@@ -33,7 +33,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, points, selectedPoint} = props;
+  const { city, points, selectedPoint } = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -62,7 +62,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, points, selectedPoint]);
 
-  return <div style={{height: '100%'}} ref={mapRef}></div>;
+  return <div style={{ height: '100%' }} ref={mapRef}></div>;
 }
 
 export default Map;
