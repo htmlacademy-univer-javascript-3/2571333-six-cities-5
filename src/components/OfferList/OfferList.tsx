@@ -29,6 +29,7 @@ function OfferList({ listOfOffers, onOfferHover, isNearPlaces = false}: OfferLis
               isPremium={card.isPremium}
               isFavorite={card.isFavorite}
               location={card.location}
+              city={card.city}
               isNearPlaces={isNearPlaces}
             />
           </div>

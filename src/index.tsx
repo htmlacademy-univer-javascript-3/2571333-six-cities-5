@@ -5,6 +5,9 @@ import { favoriteOffers } from './mocks/favoriteOffers';
 import { mockOfferReviewsList } from './mocks/reviews';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { fetchOffers } from './store/actionsAPI';
+
+store.dispatch(fetchOffers());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

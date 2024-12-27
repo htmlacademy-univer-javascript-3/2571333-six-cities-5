@@ -6,6 +6,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { CityList } from '../../components/CityList/CityList';
 import PlacesSorter from '../../components/PlacesSorter/PlacesSorter';
 import { SortOptions } from '../../recources/SortOptions';
+import Spinner from '../../components/Spinner/Spinner';
 
 function MainPage(): JSX.Element {
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
@@ -13,6 +14,7 @@ function MainPage(): JSX.Element {
 
   const currrentCity = useAppSelector((state) => state.city);
   const currentOffers = useAppSelector((state) => state.stateOffers);
+  const currentlyLoading = useAppSelector((state) => state.isLoadingOffers);
 
   function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
@@ -22,18 +24,20 @@ function MainPage(): JSX.Element {
     setCurrentSorting(sorting);
   };
 
+  const currentCityOffers = useMemo(() => currentOffers.filter((offer) => offer.city.name === currrentCity.name), [currentOffers, currrentCity]);
+
   const sortedOffers = useMemo(() => {
     switch (currentSorting) {
       case SortOptions.TOP_RATED:
-        return currentOffers.toSorted((a, b) => b.rating - a.rating);
+        return currentCityOffers.toSorted((a, b) => b.rating - a.rating);
       case SortOptions.HIGH_TO_LOW:
-        return currentOffers.toSorted((a, b) => b.price - a.price);
+        return currentCityOffers.toSorted((a, b) => b.price - a.price);
       case SortOptions.LOW_TO_HIGH:
-        return currentOffers.toSorted((a, b) => a.price - b.price);
+        return currentCityOffers.toSorted((a, b) => a.price - b.price);
       default:
-        return currentOffers;
+        return currentCityOffers;
     }
-  }, [currentOffers, currentSorting]);
+  }, [currentCityOffers, currentSorting]);
 
   return (
     <div className="page page--gray page--main">
@@ -77,13 +81,13 @@ function MainPage(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentOffers.length} places to stay in {currrentCity.name}</b>
-              <PlacesSorter currentSorting={currentSorting} onSortingChange={onSortingChange}/>
-              <OfferList listOfOffers={sortedOffers} onOfferHover={onOfferHover} />
+              <b className="places__found">{currentCityOffers.length} places to stay in {currrentCity.name}</b>
+              <PlacesSorter currentSorting={currentSorting} onSortingChange={onSortingChange} />
+              {currentlyLoading ? <Spinner/> : <OfferList listOfOffers={sortedOffers} onOfferHover={onOfferHover} />}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={currrentCity} points={currentOffers} selectedPoint={activeCard} />
+                <Map city={currrentCity} points={currentCityOffers} selectedPoint={activeCard} />
               </section>
             </div>
           </div>
