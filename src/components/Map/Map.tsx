@@ -7,6 +7,7 @@ import { CardProps } from '../../recources/Types';
 export type MapCoordinates = {
     latitude: number;
     longitude: number;
+    zoom: number;
 }
 
 export type City = {
@@ -60,7 +61,7 @@ function Map(props: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPoint, city]);
 
   return <div style={{ height: '100%' }} ref={mapRef}></div>;
 }
