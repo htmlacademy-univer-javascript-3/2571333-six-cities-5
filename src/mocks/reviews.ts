@@ -2,7 +2,7 @@ import { ReviewProps } from '../components/Review/Review';
 import { OfferPageProps } from '../pages/OfferPage/OfferPage';
 import { CITIES } from '../recources/Cities';
 import { User } from '../recources/Types';
-import { offers } from '../mocks/offers';
+import { mockOffers } from '../mocks/offers';
 
 export const mockMaxUser: User = {
   userName: 'Max',
@@ -20,7 +20,7 @@ export const mockReviewList: ReviewProps[] = [mockMaxFirstReview];
 
 export const mockFirstOfferReview: OfferPageProps = {
   city: CITIES.Amsterdam,
-  proxyCards: offers,
+  proxyCards: mockOffers,
   numberOfReviews: 1,
   postedReviews: mockReviewList
 };

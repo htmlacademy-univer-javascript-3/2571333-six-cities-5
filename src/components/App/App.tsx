@@ -11,19 +11,17 @@ import { CardProps } from '../../recources/Types.ts';
 
 
 type AppProps = {
-  numberOfOffers: number;
-  listOfOffers: CardProps[];
   listOfFavoriteOffers: CardProps[];
   offersProps: OfferPageProps[];
 };
 
-function App({ numberOfOffers, listOfOffers, listOfFavoriteOffers, offersProps }: AppProps): JSX.Element {
+function App({ listOfFavoriteOffers, offersProps }: AppProps): JSX.Element {
   const isAuth = false;
   const tempFirstOfferProps: OfferPageProps = offersProps[0];
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage numberOfOffers={numberOfOffers} listOfOffers={listOfOffers} />} />
+        <Route path={AppRoute.Main} element={<MainPage/>} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route path={AppRoute.Offer} element={<OfferPage {...tempFirstOfferProps} />} />
         <Route path={AppRoute.Favorites} element={

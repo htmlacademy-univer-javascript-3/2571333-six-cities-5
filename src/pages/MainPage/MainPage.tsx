@@ -1,19 +1,14 @@
 import { useState } from 'react';
 import OfferList from '../../components/OfferList/OfferList';
 import Map from '../../components/Map/Map';
-import { CITIES } from '../../recources/Cities';
 import { CardProps } from '../../recources/Types';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { CityList } from '../../components/CityList/CityList';
 
-type MainPageProps = {
-  numberOfOffers: number;
-  listOfOffers: CardProps[];
-};
-
-function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
-
-  const slicedListOfOffers: CardProps[] = listOfOffers.slice(0, numberOfOffers);
-  const currrentCity = CITIES.Amsterdam;
+  const currrentCity = useAppSelector((state) => state.city);
+  const currentOffers = useAppSelector((state) => state.stateOffers);
 
   function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
@@ -54,45 +49,14 @@ function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element 
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CityList />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{currentOffers.length} places to stay in {currrentCity.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -108,11 +72,11 @@ function MainPage({ numberOfOffers, listOfOffers }: MainPageProps): JSX.Element 
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferList listOfOffers={slicedListOfOffers} onOfferHover={onOfferHover}/>
+              <OfferList listOfOffers={currentOffers} onOfferHover={onOfferHover} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={currrentCity} points={slicedListOfOffers} selectedPoint={activeCard}/>
+                <Map city={currrentCity} points={currentOffers} selectedPoint={activeCard} />
               </section>
             </div>
           </div>
