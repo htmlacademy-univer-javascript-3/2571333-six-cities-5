@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
-import { mockOffers } from '../../mocks/offers';
 import { CITIES } from '../../recources/Cities';
-import { setCity, setOffers } from '../../store/actions';
+import { changeCity} from '../../store/actions';
 
 export const CityList = () => {
   const currentCity = useAppSelector((state) => state.city);
@@ -15,8 +14,7 @@ export const CityList = () => {
             <a className={`locations__item-link tabs__item ${(cityName === currentCity.name) ? 'tabs__item--active' : null}`}
               href="#"
               onClick={() => {
-                dispatch(setCity({city: city}));
-                dispatch(setOffers({offers: mockOffers}));
+                dispatch(changeCity(city));
               }}
             >
               <span>{cityName}</span>

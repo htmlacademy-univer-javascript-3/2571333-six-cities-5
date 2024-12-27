@@ -1,6 +1,8 @@
 import {createAction} from '@reduxjs/toolkit';
 import { City } from '../components/Map/Map';
 import { CardProps } from '../recources/Types';
+import { ActionTypes } from '../recources/ActionTypes';
 
-export const setCity = createAction<{city: City}>('setCity');
-export const setOffers = createAction<{offers: CardProps[]}>('setOffers');
+export const changeCity = createAction<City>(`${ActionTypes.CITY}/change`);
+export const fillOffers = createAction<CardProps[]>(`${ActionTypes.OFFERS}/fill`);
+export const setOffersLoadingStatus = createAction<boolean>(`${ActionTypes.OFFERS}/loading`);

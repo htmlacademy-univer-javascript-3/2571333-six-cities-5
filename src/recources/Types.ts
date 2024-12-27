@@ -1,4 +1,4 @@
-import { MapCoordinates } from '../components/Map/Map';
+import { City, MapCoordinates } from '../components/Map/Map';
 
 export type CardProps = {
   id: number;
@@ -10,6 +10,7 @@ export type CardProps = {
   isPremium: boolean;
   isFavorite: boolean;
   location: MapCoordinates;
+  city: City;
   isNearPlaces?: boolean;
 }
 

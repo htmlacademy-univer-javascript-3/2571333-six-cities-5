@@ -1,3 +1,4 @@
+import { CITIES } from '../recources/Cities';
 import { CardProps } from '../recources/Types';
 
 
@@ -15,7 +16,8 @@ export const mockOffers: CardProps[] = [
       latitude: 52.3909553943508,
       longitude: 4.85309666406198,
       zoom: 10
-    }
+    },
+    city: CITIES.Amsterdam,
   },
   {
     id: 2,
@@ -30,7 +32,8 @@ export const mockOffers: CardProps[] = [
       latitude: 52.3609553943508,
       longitude: 4.85309666406198,
       zoom: 10
-    }
+    },
+    city: CITIES.Amsterdam,
   },
   {
     id: 3,
@@ -45,7 +48,8 @@ export const mockOffers: CardProps[] = [
       latitude: 52.3909553943508,
       longitude: 4.929309666406198,
       zoom: 10
-    }
+    },
+    city: CITIES.Amsterdam,
   },
   {
     id: 4,
@@ -60,6 +64,7 @@ export const mockOffers: CardProps[] = [
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,
       zoom: 10
-    }
+    },
+    city: CITIES.Amsterdam,
   }
 ];
