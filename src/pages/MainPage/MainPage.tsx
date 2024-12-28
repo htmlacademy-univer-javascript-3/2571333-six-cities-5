@@ -1,13 +1,15 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import OfferList from '../../components/OfferList/OfferList';
 import Map from '../../components/Map/Map';
 import { CardProps } from '../../recources/Types';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
 import { CityList } from '../../components/CityList/CityList';
 import PlacesSorter from '../../components/PlacesSorter/PlacesSorter';
 import { SortOptions } from '../../recources/SortOptions';
 import Spinner from '../../components/Spinner/Spinner';
 import PageHeader from '../../components/PageHeader/PageHeader';
+import { setOffersLoadingStatus } from '../../store/actions';
+import { LoadingStatus } from '../../recources/LoadingStatus';
 
 function MainPage(): JSX.Element {
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
@@ -27,6 +29,8 @@ function MainPage(): JSX.Element {
     setCurrentSorting(sorting);
   };
 
+  const UseAppDispatchLocalUsage = useAppDispatch();
+
   const currentCityOffers = useMemo(() => currentOffers.filter((offer) => offer.city.name === currrentCity.name), [currentOffers, currrentCity]);
 
   const sortedOffers = useMemo(() => {
@@ -41,6 +45,15 @@ function MainPage(): JSX.Element {
         return currentCityOffers;
     }
   }, [currentCityOffers, currentSorting]);
+
+
+  useEffect(() => {
+    if (!currentlyLoading) {
+      return;
+    }
+    UseAppDispatchLocalUsage(setOffersLoadingStatus(currentlyLoading));
+
+  }, [UseAppDispatchLocalUsage, currentlyLoading]);
 
   return (
     <div className="page page--gray page--main">
@@ -59,7 +72,7 @@ function MainPage(): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentCityOffers.length} places to stay in {currrentCity.name}</b>
               <PlacesSorter currentSorting={currentSorting} onSortingChange={onSortingChange} />
-              {currentlyLoading ? <Spinner /> : <OfferList listOfOffers={sortedOffers} onOfferHover={onOfferHover} />}
+              {currentlyLoading !== LoadingStatus.Success ? <Spinner /> : <OfferList listOfOffers={sortedOffers} onOfferHover={onOfferHover} />}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

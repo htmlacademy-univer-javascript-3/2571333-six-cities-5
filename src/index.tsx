@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App/App';
 import { favoriteOffers } from './mocks/favoriteOffers';
-import { mockOfferReviewsList } from './mocks/reviews';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { fetchOffers, userCheckAuth } from './store/actionsAPI';
@@ -19,7 +18,6 @@ root.render(
     <Provider store={store}>
       <App
         listOfFavoriteOffers={favoriteOffers}
-        offersProps={mockOfferReviewsList}
       />
     </Provider>
   </React.StrictMode>
