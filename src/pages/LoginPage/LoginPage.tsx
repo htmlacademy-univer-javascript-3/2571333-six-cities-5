@@ -1,10 +1,11 @@
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useEffect } from 'react';
 import HeaderPic from '../../components/PageHeader/HeaderPic';
-import { useAppDispatch } from '../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
 import { userLogin } from '../../store/actionsAPI';
 import { authData } from '../../recources/Types';
 import { AppRoute } from '../../recources/Routes';
 import { useNavigate } from 'react-router-dom';
+import { setOffersLoadingStatus } from '../../store/actions';
 
 function LoginPage(): JSX.Element {
 
@@ -29,6 +30,16 @@ function LoginPage(): JSX.Element {
     //   return <Navigate to={AppRoute.Main} />;
     // }
   };
+
+
+  const currentlyLoading = useAppSelector((state) => state.isLoadingOffers);
+  useEffect(() => {
+    if (!currentlyLoading) {
+      return;
+    }
+    UseAppDispatchLocalUsage(setOffersLoadingStatus(currentlyLoading));
+
+  }, [UseAppDispatchLocalUsage, currentlyLoading]);
 
   return (
     <div className="page page--gray page--login">

@@ -1,167 +1,188 @@
-import { useState } from 'react';
-import { City } from '../../components/Map/Map';
+import { useEffect, useState } from 'react';
 import OfferList from '../../components/OfferList/OfferList';
-import { ReviewProps } from '../../components/Review/Review';
 import ReviewBlock from '../../components/ReviewBlock/ReviewBlock';
 import { CardProps } from '../../recources/Types';
 import Map from '../../components/Map/Map';
 import PageHeader from '../../components/PageHeader/PageHeader';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import Spinner from '../../components/Spinner/Spinner';
+import { LoadingStatus } from '../../recources/LoadingStatus';
+import { useParams } from 'react-router-dom';
+import { clearComments, clearNearbyOffers, clearOffer } from '../../store/actions';
+import { fetchComments, fetchOffersNearby, fetchOneOffer } from '../../store/actionsAPI';
 
-export type OfferPageProps = {
-  city: City;
-  proxyCards: CardProps[];
-  numberOfReviews: number;
-  postedReviews: ReviewProps[];
-}
+function OfferPage(): JSX.Element {
+  const { id } = useParams();
 
-function OfferPage({ city, proxyCards, numberOfReviews, postedReviews }: OfferPageProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
 
   const userData = useAppSelector((state) => state.userData);
   const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const offer = useAppSelector((state) => state.stateCurrentOffer);
+  const isLoadingOneOfferLocalUsage = useAppSelector((state) => state.isLoadingOneOffer);
+  const postedReviews = useAppSelector((state) => state.stateOfferComments);
+  const isLoadingOfferCommentsLocalUsage = useAppSelector((state) => state.isLoadingOfferComments);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const isLoadingOffers = useAppSelector((state) => state.isLoadingOffers);
+
+  const UseAppDispatchLocalUsage = useAppDispatch();
 
   function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
   }
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    UseAppDispatchLocalUsage(fetchOneOffer(id));
+
+    return () => {
+      UseAppDispatchLocalUsage(clearOffer());
+    };
+  }, [UseAppDispatchLocalUsage, id]);
+
+  useEffect(() => {
+    if (!id || !offer) {
+      return;
+    }
+    UseAppDispatchLocalUsage(fetchOffersNearby(id));
+    UseAppDispatchLocalUsage(fetchComments(id));
+
+    return () => {
+      UseAppDispatchLocalUsage(clearNearbyOffers());
+      UseAppDispatchLocalUsage(clearComments());
+    };
+  }, [UseAppDispatchLocalUsage, id, offer]);
 
   return (
     <div className="page">
       <PageHeader isAuthorized={isAuthorized} userData={userData} />
 
       <main className="page__main page__main--offer">
-        <section className="offer">
-          <div className="offer__gallery-container container">
-            <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-            </div>
-          </div>
-          <div className="offer__container container">
-            <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
-              <div className="offer__name-wrapper">
-                <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
-                </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
-              </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">4.8</span>
-              </div>
-              <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">
-                  Apartment
-                </li>
-                <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
-                </li>
-                <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
-                </li>
-              </ul>
-              <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
-                <span className="offer__price-text">&nbsp;night</span>
-              </div>
-              <div className="offer__inside">
-                <h2 className="offer__inside-title">What&apos;s inside</h2>
-                <ul className="offer__inside-list">
-                  <li className="offer__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="offer__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Towels
-                  </li>
-                  <li className="offer__inside-item">
-                    Heating
-                  </li>
-                  <li className="offer__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="offer__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="offer__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="offer__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="offer__inside-item">
-                    Fridge
-                  </li>
-                </ul>
-              </div>
-              <div className="offer__host">
-                <h2 className="offer__host-title">Meet the host</h2>
-                <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
-                  </div>
-                  <span className="offer__user-name">
-                    Angelina
-                  </span>
-                  <span className="offer__user-status">
-                    Pro
-                  </span>
-                </div>
-                <div className="offer__description">
-                  <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                  </p>
-                </div>
-              </div>
-              <ReviewBlock numberOfReviews={numberOfReviews} postedReviews={postedReviews} />
-            </div>
-          </div>
-          <section className="offer__map map">
-            <Map city={city} points={proxyCards} selectedPoint={activeCard} />
-          </section>
-        </section>
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <OfferList listOfOffers={proxyCards} onOfferHover={onOfferHover} isNearPlaces />
-          </section>
-        </div>
+        {isLoadingOneOfferLocalUsage !== LoadingStatus.Success || !offer ? (
+          <Spinner />
+        ) : (
+          <>
+            <section className="offer">
+              <div className="offer__gallery-container container">
+                <div className="offer__gallery">
+                  {offer.images?.map((image) => (
+                    <div className="offer__image-wrapper" key={image}>
+                      <img className="offer__image" src={image} alt="Photo studio" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="offer__container container">
+                <div className="offer__wrapper">
+                  {offer.isPremium ?
+                    (
+                      <div className="offer__mark">
+                        <span>Premium</span>
+                      </div>)
+                    : null}
+
+                  <div className="offer__name-wrapper">
+                    <h1 className="offer__name">
+                      {offer.title}
+                    </h1>
+                    {isAuthorized ?
+                      (
+                        <button className="offer__bookmark-button button" type="button">
+                          <svg className="offer__bookmark-icon" width="31" height="33">
+                            <use xlinkHref="#icon-bookmark" />
+                          </svg>
+                          <span className="visually-hidden">To bookmarks</span>
+                        </button>)
+                      : null}
+                  </div>
+
+                  {/* <Rating
+                    rating={offer.rating}
+                    objectType={ObjectClass.Offer}
+                    isFullMode
+                  /> */}
+                  {/* Rating */}
+                  <div className="offer__rating rating">
+                    <div className="offer__stars rating__stars">
+                      <span style={{ width: `${offer.rating * 20}%` }}></span>
+                      <span className="visually-hidden">Rating</span>
+                    </div>
+                    <span className="offer__rating-value rating__value">{`${offer.rating}`}</span>
+                  </div>
+
+                  <ul className="offer__features">
+                    <li className="offer__feature offer__feature--entire">
+                      {offer.type}
+                    </li>
+                    <li className="offer__feature offer__feature--bedrooms">
+                      {offer.bedrooms} Bedrooms
+                    </li>
+                    <li className="offer__feature offer__feature--adults">
+                      Max {offer.maxAdults} adults
+                    </li>
+                  </ul>
+                  <div className="offer__price">
+                    <b className="offer__price-value">{offer.price}</b>
+                    <span className="offer__price-text">&nbsp;night</span>
+                  </div>
+                  <div className="offer__inside">
+                    <h2 className="offer__inside-title">What&apos;s inside</h2>
+                    <ul className="offer__inside-list">
+                      {offer.goods.map((thing) => (
+                        <li className="offer__inside-item" key={thing}>
+                          {thing}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="offer__host">
+                    <h2 className="offer__host-title">Meet the host</h2>
+                    <div className="offer__host-user user">
+                      <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                        <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                      </div>
+                      <span className="offer__user-name">
+                        {offer.host.name}
+                      </span>
+                      <span className="offer__user-status">
+                        {offer.host.isPro ?
+                          <span className="offer__user-status">Pro</span>
+                          : null}
+                      </span>
+                    </div>
+                    <div className="offer__description">
+                      <p className="offer__text">
+                        {offer.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {isLoadingOfferCommentsLocalUsage !== LoadingStatus.Success || !postedReviews ? (
+                    <Spinner />
+                  ) : (
+                    <ReviewBlock numberOfReviews={postedReviews.length} postedReviews={postedReviews} />
+                  )}
+                </div>
+              </div>
+              <section className="offer__map map">
+                <Map city={offer.city} points={nearbyOffers} selectedPoint={activeCard} />
+              </section>
+            </section>
+            <div className="container">
+              {isLoadingOffers !== LoadingStatus.Success || !nearbyOffers ? (
+                <Spinner />
+              ) : (
+                <section className="near-places places">
+                  <h2 className="near-places__title">Other places in the neighbourhood</h2>
+                  <OfferList listOfOffers={nearbyOffers} onOfferHover={onOfferHover} isNearPlaces />
+                </section>
+              )}
+            </div>
+          </>
+        )}
       </main>
     </div>
   );
