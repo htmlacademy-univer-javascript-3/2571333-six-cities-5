@@ -10,13 +10,15 @@ export type PageHeaderProps = {
     userData: UserData | null;
 }
 
-function Logout() {
-  useAppDispatch()(userLogout());
-}
-
 function PageHeader({ isAuthorized, userData }: PageHeaderProps): JSX.Element {
   const tempNumberOfFavorites = 0;
   const NumberOfFavorites = tempNumberOfFavorites;
+
+  const UseAppDispatchLocalUsage = useAppDispatch();
+
+  function Logout() {
+    UseAppDispatchLocalUsage(userLogout());
+  }
 
   return (
     <header className="header">

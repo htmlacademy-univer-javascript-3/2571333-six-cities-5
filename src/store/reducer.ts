@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { CITIES } from '../recources/Cities';
-import { changeCity, fillOffers, setAuthorizationStatus, setOffersLoadingStatus, setUserData, } from './actions';
+import { changeCity, clearUserData, fillOffers, setAuthorizationStatus, setOffersLoadingStatus, setUserData, } from './actions';
 import { City } from '../components/Map/Map';
 import { CardProps, UserData } from '../recources/Types';
 
@@ -36,6 +36,9 @@ const reducer = createReducer(startState, (builder) => {
     })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;
+    })
+    .addCase(clearUserData, (state) => {
+      state.userData = null;
     });
 });
 

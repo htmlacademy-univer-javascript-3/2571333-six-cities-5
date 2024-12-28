@@ -2,7 +2,7 @@ import { State } from 'history';
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authData, CardProps, UserData } from '../recources/Types.ts';
-import { fillOffers, setAuthorizationStatus, setOffersLoadingStatus, setUserData } from './actions.ts';
+import { clearUserData, fillOffers, setAuthorizationStatus, setOffersLoadingStatus, setUserData } from './actions.ts';
 import { APIRoutes } from '../recources/APIRoutes.ts';
 import { ActionTypes } from '../recources/ActionTypes.ts';
 import { AppDispatch } from '../hooks/useAppSelector.ts';
@@ -39,10 +39,10 @@ export const userLogout = createAsyncThunk<void, undefined, {
 }
 >(
   `${ActionTypes.USER}/logout`,
-  async (_arg, { dispatch, extra: api }) => {
+  async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoutes.USER.LOGOUT);
     dispatch(setAuthorizationStatus(false));
-    dispatch(setUserData(null));
+    dispatch(clearUserData());
     dropToken();
   },
 );
