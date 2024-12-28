@@ -8,6 +8,7 @@ import OfferPage, { OfferPageProps } from '../../pages/OfferPage/OfferPage.tsx';
 import FavoritesPage from '../../pages/FavoritesPage/FavoritesPage.tsx';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.tsx';
 import { CardProps } from '../../recources/Types.ts';
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 
 type AppProps = {
@@ -16,19 +17,18 @@ type AppProps = {
 };
 
 function App({ listOfFavoriteOffers, offersProps }: AppProps): JSX.Element {
-  const isAuth = false;
+  const isAuth = useAppSelector((state) => state.authorizationStatus);
   const tempFirstOfferProps: OfferPageProps = offersProps[0];
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={<MainPage/>} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route path={AppRoute.Offer} element={<OfferPage {...tempFirstOfferProps} />} />
+        <Route path={AppRoute.Offer} element={<OfferPage {...tempFirstOfferProps}/>} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute isAuthorized={isAuth}>
             <FavoritesPage listOfOffers={listOfFavoriteOffers} />
           </PrivateRoute>
-
         }
         />
         <Route path={'*'} element={<NotFoundPage />} />

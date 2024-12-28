@@ -3,5 +3,6 @@ export enum ActionTypes {
     OFFERS = 'Offers',
     OFFER = 'Offer',
     FAVORITES = 'Favorites',
-    COMMENTS = 'Comments'
+    COMMENTS = 'Comments',
+    USER='User'
   }

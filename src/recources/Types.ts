@@ -15,6 +15,16 @@ export type CardProps = {
 }
 
 export type User = {
-  userName: string;
+  name: string;
   avatarPath: string;
+}
+
+export type authData = {
+  email: string;
+  password: string;
+}
+
+export type UserData = User & {
+  email: string;
+  token: string;
 }
