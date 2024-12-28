@@ -5,7 +5,7 @@ import { User } from '../recources/Types';
 import { mockOffers } from '../mocks/offers';
 
 export const mockMaxUser: User = {
-  userName: 'Max',
+  name: 'Max',
   avatarPath: 'img/avatar-max.jpg'
 };
 

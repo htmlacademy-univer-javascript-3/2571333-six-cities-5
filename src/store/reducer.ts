@@ -1,19 +1,23 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { CITIES } from '../recources/Cities';
-import { changeCity, fillOffers, setOffersLoadingStatus, } from './actions';
+import { changeCity, fillOffers, setAuthorizationStatus, setOffersLoadingStatus, setUserData, } from './actions';
 import { City } from '../components/Map/Map';
-import { CardProps } from '../recources/Types';
+import { CardProps, UserData } from '../recources/Types';
 
 export type appState = {
   city: City;
   stateOffers: CardProps[];
   isLoadingOffers: boolean;
+  authorizationStatus: boolean;
+  userData: UserData | null;
 }
 
 const startState: appState = {
   city: CITIES.Paris,
   stateOffers: [],
-  isLoadingOffers: false
+  isLoadingOffers: false,
+  authorizationStatus: false,
+  userData: null,
 };
 
 const reducer = createReducer(startState, (builder) => {
@@ -26,6 +30,12 @@ const reducer = createReducer(startState, (builder) => {
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isLoadingOffers = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.userData = action.payload;
     });
 });
 

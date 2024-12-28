@@ -15,7 +15,7 @@ function Review({ id, user, reviewRating, reviewText }: ReviewProps): JSX.Elemen
           <img className="reviews__avatar user__avatar" src={user.avatarPath} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          {user.userName}
+          {user.name}
         </span>
       </div>
       <div className="reviews__info">
