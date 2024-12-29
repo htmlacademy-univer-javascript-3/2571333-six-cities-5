@@ -6,7 +6,7 @@ export const APIRoutes = {
   },
   FAVORITE: {
     GET: '/favorite',
-    SET_STATUS: '/favorite/{offerId}/{status}',
+    SET_STATUS: (offerId: string, status: number) => `/favorite/${offerId}/${status}`,
   },
   COMMENTS: {
     GET: (offerId: string) => `/comments/${offerId}`,

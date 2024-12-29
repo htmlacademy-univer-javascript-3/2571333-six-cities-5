@@ -7,16 +7,11 @@ import LoginPage from '../../pages/LoginPage/LoginPage.tsx';
 import OfferPage from '../../pages/OfferPage/OfferPage.tsx';
 import FavoritesPage from '../../pages/FavoritesPage/FavoritesPage.tsx';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.tsx';
-import { CardProps } from '../../recources/Types.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
 import { ActionTypes } from '../../recources/ActionTypes.ts';
 
 
-type AppProps = {
-  listOfFavoriteOffers: CardProps[];
-};
-
-function App({ listOfFavoriteOffers }: AppProps): JSX.Element {
+function App(): JSX.Element {
   const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
     <BrowserRouter>
@@ -26,7 +21,7 @@ function App({ listOfFavoriteOffers }: AppProps): JSX.Element {
         <Route path={AppRoute.Offer} element={<OfferPage />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute isAuthorized={isAuth}>
-            <FavoritesPage listOfOffers={listOfFavoriteOffers} />
+            <FavoritesPage />
           </PrivateRoute>
         }
         />

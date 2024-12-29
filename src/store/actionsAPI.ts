@@ -2,7 +2,7 @@ import { State } from 'history';
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authData, CardProps, FullOfferInfo, UserData } from '../recources/Types.ts';
-import { clearUserData, fillOffers, setAuthorizationStatus, setComments, setLoadingOfferComments, setLoadingOneOfferStatus, setNearbyOffers, setOffer, setOffersLoadingStatus, setUserData } from './actions.ts';
+import { clearUserData, fillOffers, setAuthorizationStatus, setComments, setFavorites, setFavoritesLoadingStatus, setLoadingOfferComments, setLoadingOneOfferStatus, setNearbyOffers, setOffer, setOffersLoadingStatus, setUserData } from './actions.ts';
 import { APIRoutes } from '../recources/APIRoutes.ts';
 import { ActionTypes } from '../recources/ActionTypes.ts';
 import { AppDispatch } from '../hooks/useAppSelector.ts';
@@ -10,6 +10,7 @@ import { StatusCodes } from 'http-status-codes';
 import { dropToken, saveToken } from '../api.ts';
 import { LoadingStatus } from '../recources/LoadingStatus.ts';
 import { ReviewProps } from '../components/Review/Review.tsx';
+import { ReviewFormState } from '../components/ReviewForm/ReviewForm.tsx';
 
 export const userLogin = createAsyncThunk<void, authData, {
   dispatch: AppDispatch;
@@ -130,5 +131,45 @@ export const fetchComments = createAsyncThunk<void, string, {
     const { data: comments } = await api.get<ReviewProps[]>(APIRoutes.COMMENTS.GET(id));
     dispatch(setComments(comments));
     dispatch(setLoadingOfferComments(LoadingStatus.Success));
+  },
+);
+
+export const fetchFavorites = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  `${ActionTypes.FAVORITES}/fetch`,
+  async (_arg, {dispatch, extra: api}) => {
+    dispatch(setFavoritesLoadingStatus(LoadingStatus.Pending));
+    const {status, data} = await api.get<CardProps[]>(APIRoutes.FAVORITE.GET);
+    if (status === Number(StatusCodes.NOT_FOUND)) {
+      dispatch(setFavoritesLoadingStatus(LoadingStatus.Failure));
+      return;
+    }
+
+    dispatch(setFavorites(data));
+    dispatch(setFavoritesLoadingStatus(LoadingStatus.Success));
+  },
+);
+
+export const changeFavorite = createAsyncThunk<void, { offerId: string; favoriteStatus: boolean; offerPageId?: string }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  `${ActionTypes.FAVORITES}/change`,
+  async ({ offerId, favoriteStatus, offerPageId }, { dispatch, extra: api }) => {
+    const { status } = await api.post<ReviewFormState>(APIRoutes.FAVORITE.SET_STATUS(offerId, favoriteStatus ? 1 : 0));
+
+    if ((status === Number(StatusCodes.CREATED) || status === Number(StatusCodes.OK))) {
+      dispatch(fetchFavorites());
+      dispatch(fetchOffers());
+      if (offerPageId) {
+        dispatch(fetchOffersNearby(offerPageId));
+      }
+    }
   },
 );
