@@ -1,9 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { ActionTypes } from '../../recources/ActionTypes';
 import { CITIES } from '../../recources/Cities';
 import { changeCity} from '../../store/actions';
 
 export const CityList = () => {
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector((state) => state[ActionTypes.CITY].city);
   const dispatch = useAppDispatch();
 
   return (

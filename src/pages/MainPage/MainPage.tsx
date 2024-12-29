@@ -10,16 +10,17 @@ import Spinner from '../../components/Spinner/Spinner';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import { setOffersLoadingStatus } from '../../store/actions';
 import { LoadingStatus } from '../../recources/LoadingStatus';
+import { ActionTypes } from '../../recources/ActionTypes';
 
 function MainPage(): JSX.Element {
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
   const [currentSorting, setCurrentSorting] = useState<SortOptions>(SortOptions.POPULAR);
 
-  const currrentCity = useAppSelector((state) => state.city);
-  const currentOffers = useAppSelector((state) => state.stateOffers);
-  const currentlyLoading = useAppSelector((state) => state.isLoadingOffers);
-  const userData = useAppSelector((state) => state.userData);
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const currrentCity = useAppSelector((state) => state[ActionTypes.CITY].city);
+  const currentOffers = useAppSelector((state) => state[ActionTypes.OFFERS].offers);
+  const currentlyLoading = useAppSelector((state) => state[ActionTypes.OFFERS].isOffersDataLoading);
+  const userData = useAppSelector((state) => state[ActionTypes.USER].userData);
+  const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
 
   function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
@@ -55,15 +56,23 @@ function MainPage(): JSX.Element {
 
   }, [UseAppDispatchLocalUsage, currentlyLoading]);
 
+  const cityListMemo = useMemo(() => <CityList />, []);
+
+  const pageHeardMemo = useMemo(() => <PageHeader isAuthorized={isAuthorized} userData={userData} />, [isAuthorized, userData]);
+
+  const placesSorterMemo = useMemo(() => <PlacesSorter currentSorting={currentSorting} onSortingChange={onSortingChange} />, [currentSorting]);
+
+  const offerListMemo = useMemo(() => <OfferList listOfOffers={sortedOffers} onOfferHover={onOfferHover} />, [sortedOffers]);
+
   return (
     <div className="page page--gray page--main">
-      <PageHeader isAuthorized={isAuthorized} userData={userData} />
+      {pageHeardMemo}
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CityList />
+            {cityListMemo}
           </section>
         </div>
         <div className="cities">
@@ -71,8 +80,8 @@ function MainPage(): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentCityOffers.length} places to stay in {currrentCity.name}</b>
-              <PlacesSorter currentSorting={currentSorting} onSortingChange={onSortingChange} />
-              {currentlyLoading !== LoadingStatus.Success ? <Spinner /> : <OfferList listOfOffers={sortedOffers} onOfferHover={onOfferHover} />}
+              {placesSorterMemo}
+              {currentlyLoading !== LoadingStatus.Success ? <Spinner /> : offerListMemo}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

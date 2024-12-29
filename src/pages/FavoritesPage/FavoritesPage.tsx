@@ -3,6 +3,7 @@ import OfferList from '../../components/OfferList/OfferList';
 import { CardProps } from '../../recources/Types';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { ActionTypes } from '../../recources/ActionTypes';
 
 type FavoritesPageProps = {
   listOfOffers: CardProps[];
@@ -13,8 +14,8 @@ function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
   // const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
   const [, setActiveCard] = useState<CardProps | undefined>(undefined);
 
-  const userData = useAppSelector((state) => state.userData);
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const userData = useAppSelector((state) => state[ActionTypes.USER].userData);
+  const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
 
   function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
