@@ -1,14 +1,15 @@
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { ActionTypes } from '../../recources/ActionTypes';
 import Review, { ReviewProps } from '../Review/Review';
 import ReviewForm from '../ReviewForm/ReviewForm';
 
 export type ReviewBlockProps = {
-    numberOfReviews: number;
-    postedReviews: ReviewProps[];
+  numberOfReviews: number;
+  postedReviews: ReviewProps[];
 }
 
 function ReviewBlock({ numberOfReviews, postedReviews }: ReviewBlockProps): JSX.Element {
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
 
   return (
     <section className="offer__reviews reviews">

@@ -9,6 +9,7 @@ import FavoritesPage from '../../pages/FavoritesPage/FavoritesPage.tsx';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.tsx';
 import { CardProps } from '../../recources/Types.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
+import { ActionTypes } from '../../recources/ActionTypes.ts';
 
 
 type AppProps = {
@@ -16,7 +17,7 @@ type AppProps = {
 };
 
 function App({ listOfFavoriteOffers }: AppProps): JSX.Element {
-  const isAuth = useAppSelector((state)=> state.authorizationStatus);
+  const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
     <BrowserRouter>
       <Routes>

@@ -10,20 +10,21 @@ import { LoadingStatus } from '../../recources/LoadingStatus';
 import { useParams } from 'react-router-dom';
 import { clearComments, clearNearbyOffers, clearOffer } from '../../store/actions';
 import { fetchComments, fetchOffersNearby, fetchOneOffer } from '../../store/actionsAPI';
+import { ActionTypes } from '../../recources/ActionTypes';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
 
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
 
-  const userData = useAppSelector((state) => state.userData);
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
-  const offer = useAppSelector((state) => state.stateCurrentOffer);
-  const isLoadingOneOfferLocalUsage = useAppSelector((state) => state.isLoadingOneOffer);
-  const postedReviews = useAppSelector((state) => state.stateOfferComments);
-  const isLoadingOfferCommentsLocalUsage = useAppSelector((state) => state.isLoadingOfferComments);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  const isLoadingOffers = useAppSelector((state) => state.isLoadingOffers);
+  const userData = useAppSelector((state) => state[ActionTypes.USER].userData);
+  const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
+  const offer = useAppSelector((state) => state[ActionTypes.OFFER].offer);
+  const isLoadingOneOfferLocalUsage = useAppSelector((state) => state[ActionTypes.OFFER].isOfferDataLoading);
+  const postedReviews = useAppSelector((state) => state[ActionTypes.COMMENTS].comments);
+  const isLoadingOfferCommentsLocalUsage = useAppSelector((state) => state[ActionTypes.COMMENTS].isCommentsDataLoading);
+  const nearbyOffers = useAppSelector((state) => state[ActionTypes.OFFERS].nearbyOffers);
+  const isLoadingOffers = useAppSelector((state) => state[ActionTypes.OFFERS].isOffersDataLoading);
 
   const UseAppDispatchLocalUsage = useAppDispatch();
 
@@ -98,13 +99,6 @@ function OfferPage(): JSX.Element {
                         </button>)
                       : null}
                   </div>
-
-                  {/* <Rating
-                    rating={offer.rating}
-                    objectType={ObjectClass.Offer}
-                    isFullMode
-                  /> */}
-                  {/* Rating */}
                   <div className="offer__rating rating">
                     <div className="offer__stars rating__stars">
                       <span style={{ width: `${offer.rating * 20}%` }}></span>

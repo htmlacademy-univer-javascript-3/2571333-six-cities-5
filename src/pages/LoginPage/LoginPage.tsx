@@ -6,12 +6,12 @@ import { authData } from '../../recources/Types';
 import { AppRoute } from '../../recources/Routes';
 import { useNavigate } from 'react-router-dom';
 import { setOffersLoadingStatus } from '../../store/actions';
+import { ActionTypes } from '../../recources/ActionTypes';
 
 function LoginPage(): JSX.Element {
 
   const UseAppDispatchLocalUsage = useAppDispatch();
   const UseNavigateLocalUsage = useNavigate();
-  // const useAppSelectorLocalUsage = useAppSelector((state) => state.authorizationStatus);
 
   const handleLogin: FormEventHandler = (event) => {
     event.preventDefault();
@@ -26,13 +26,10 @@ function LoginPage(): JSX.Element {
       UseAppDispatchLocalUsage(userLogin(user as authData));
     }
     UseNavigateLocalUsage(AppRoute.Main);
-    // if (useAppSelectorLocalUsage) {
-    //   return <Navigate to={AppRoute.Main} />;
-    // }
   };
 
 
-  const currentlyLoading = useAppSelector((state) => state.isLoadingOffers);
+  const currentlyLoading = useAppSelector((state) => state[ActionTypes.OFFERS].isOffersDataLoading);
   useEffect(() => {
     if (!currentlyLoading) {
       return;
