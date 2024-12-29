@@ -25,9 +25,8 @@ function PageHeader(): JSX.Element {
     dispatch(userLogout());
   };
 
-  const favoritesCount = useMemo(() => <span className="header__favorite-count">{favorites.length}</span>, [favorites, userData]);
+  const favoritesCount = useMemo(() => <span className="header__favorite-count">{favorites.length}</span>, [favorites]);
 
-  console.log(favorites)
   return (
     <header className="header">
       <div className="container">

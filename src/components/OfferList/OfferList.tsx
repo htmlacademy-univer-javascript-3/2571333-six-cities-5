@@ -13,7 +13,7 @@ export type OfferListProps = {
 }
 
 function OfferList({ listOfOffers, onOfferHover, isNearPlaces = false, offerPageId = undefined }: OfferListProps): JSX.Element {
-  
+
   const UseAppDispatchLocalUsage = useAppDispatch();
   function changeToFavorites(id: string, isFavorite: boolean): void {
     if (offerPageId) {
@@ -23,14 +23,14 @@ function OfferList({ listOfOffers, onOfferHover, isNearPlaces = false, offerPage
           favoriteStatus: !isFavorite,
           offerPageId: offerPageId
         }
-      ))
+      ));
     } else {
       UseAppDispatchLocalUsage(changeFavorite(
         {
           offerId: String(id),
           favoriteStatus: !isFavorite
         }
-      ))
+      ));
     }
   }
 

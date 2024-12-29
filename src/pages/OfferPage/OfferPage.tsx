@@ -56,14 +56,12 @@ function OfferPage(): JSX.Element {
   }, [UseAppDispatchLocalUsage, id, offer]);
 
   function changeToFavorites(): void {
-    console.log(id + ': ' + offer?.isFavorite)
     UseAppDispatchLocalUsage(changeFavorite(
       {
         offerId: String(id),
         favoriteStatus: !offer?.isFavorite
       }
-    ))
-    console.log(id + ': ' + offer?.isFavorite)
+    ));
   }
 
   return (

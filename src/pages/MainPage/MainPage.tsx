@@ -72,24 +72,24 @@ function MainPage(): JSX.Element {
             {cityListMemo}
           </section>
         </div>
-        {currentlyLoading === LoadingStatus.Failure ? 
-        <MainEmpty/>
-        : 
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentCityOffers.length} places to stay in {currrentCity.name}</b>
-              {placesSorterMemo}
-              {currentlyLoading !== LoadingStatus.Success ? <Spinner /> : offerListMemo}
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map city={currrentCity} points={currentCityOffers} selectedPoint={activeCard} />
+        {currentlyLoading === LoadingStatus.Failure ?
+          <MainEmpty/>
+          :
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{currentCityOffers.length} places to stay in {currrentCity.name}</b>
+                {placesSorterMemo}
+                {currentlyLoading !== LoadingStatus.Success ? <Spinner /> : offerListMemo}
               </section>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map city={currrentCity} points={currentCityOffers} selectedPoint={activeCard} />
+                </section>
+              </div>
             </div>
-          </div>
-        </div>}
+          </div>}
       </main>
     </div>
   );

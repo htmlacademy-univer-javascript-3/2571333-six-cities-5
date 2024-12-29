@@ -144,7 +144,6 @@ export const fetchFavorites = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setFavoritesLoadingStatus(LoadingStatus.Pending));
     const {status, data} = await api.get<CardProps[]>(APIRoutes.FAVORITE.GET);
-    console.log('data: ', data);
     if (status === Number(StatusCodes.NOT_FOUND)) {
       dispatch(setFavoritesLoadingStatus(LoadingStatus.Failure));
       return;
@@ -155,7 +154,7 @@ export const fetchFavorites = createAsyncThunk<void, undefined, {
   },
 );
 
-export const changeFavorite = createAsyncThunk<void, { offerId: string; favoriteStatus: boolean, offerPageId?: string }, {
+export const changeFavorite = createAsyncThunk<void, { offerId: string; favoriteStatus: boolean; offerPageId?: string }, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -168,7 +167,9 @@ export const changeFavorite = createAsyncThunk<void, { offerId: string; favorite
     if ((status === Number(StatusCodes.CREATED) || status === Number(StatusCodes.OK))) {
       dispatch(fetchFavorites());
       dispatch(fetchOffers());
-      if (offerPageId) dispatch(fetchOffersNearby(offerPageId))
+      if (offerPageId) {
+        dispatch(fetchOffersNearby(offerPageId));
+      }
     }
   },
 );
