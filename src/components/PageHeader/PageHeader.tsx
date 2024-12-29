@@ -1,25 +1,33 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../recources/Routes';
-import { useAppDispatch } from '../../hooks/useAppSelector';
-import { userLogout } from '../../store/actionsAPI';
-import { UserData } from '../../recources/Types';
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { fetchFavorites, userLogout } from '../../store/actionsAPI';
 import HeaderPic from './HeaderPic';
+import { useEffect, useMemo } from 'react';
+import { ActionTypes } from '../../recources/ActionTypes';
 
-export type PageHeaderProps = {
-    isAuthorized: boolean;
-    userData: UserData | null;
-}
+function PageHeader(): JSX.Element {
 
-function PageHeader({ isAuthorized, userData }: PageHeaderProps): JSX.Element {
-  const tempNumberOfFavorites = 0;
-  const NumberOfFavorites = tempNumberOfFavorites;
+  const dispatch = useAppDispatch();
 
-  const UseAppDispatchLocalUsage = useAppDispatch();
+  const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
+  const userData = useAppSelector((state) => state[ActionTypes.USER].userData);
+  const favorites = useAppSelector((state) => state[ActionTypes.FAVORITES].favorites);
 
-  function Logout() {
-    UseAppDispatchLocalUsage(userLogout());
-  }
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(fetchFavorites());
+    }
+  }, [dispatch, isAuthorized, userData]);
 
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+  };
+
+  const favoritesCount = useMemo(() => <span className="header__favorite-count">{favorites.length}</span>, [favorites, userData]);
+
+  console.log(favorites)
   return (
     <header className="header">
       <div className="container">
@@ -37,11 +45,11 @@ function PageHeader({ isAuthorized, userData }: PageHeaderProps): JSX.Element {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">{userData.name}</span>
-                    <span className="header__favorite-count">{NumberOfFavorites}</span>
+                    {favoritesCount}
                   </Link>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" onClick={Logout}>
+                  <a className="header__nav-link" onClick={handleLogout}>
                     <span className="header__signout">Sign out</span>
                   </a>
                 </li>

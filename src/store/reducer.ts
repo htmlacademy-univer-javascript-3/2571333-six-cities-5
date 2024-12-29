@@ -5,6 +5,7 @@ import { userReducer } from './reducers/userReducer';
 import { offersReducer } from './reducers/offersReducer';
 import { offerReducer } from './reducers/offerReducer';
 import { commentsReducer } from './reducers/commentsReducer';
+import { favoritesReducer } from './reducers/favoriteReducer';
 
 const reducer = combineReducers({
   [ActionTypes.USER]: userReducer,
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   [ActionTypes.OFFERS]: offersReducer,
   [ActionTypes.OFFER]: offerReducer,
   [ActionTypes.COMMENTS]: commentsReducer,
+  [ActionTypes.FAVORITES]: favoritesReducer,
 });
 
 export {reducer};

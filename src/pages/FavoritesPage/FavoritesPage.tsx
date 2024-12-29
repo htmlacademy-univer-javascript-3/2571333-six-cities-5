@@ -1,68 +1,43 @@
-import { useState } from 'react';
-import OfferList from '../../components/OfferList/OfferList';
-import { CardProps } from '../../recources/Types';
+import { Link } from 'react-router-dom';
+import OffersOnCities from '../../components/OffersOnCities/OffersOnCities';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { ActionTypes } from '../../recources/ActionTypes';
+import { LoadingStatus } from '../../recources/LoadingStatus';
+import { AppRoute } from '../../recources/Routes';
 
-type FavoritesPageProps = {
-  listOfOffers: CardProps[];
-};
-
-function FavoritesPage({ listOfOffers }: FavoritesPageProps): JSX.Element {
-  // TODO add activeCard back as soon as you start using it
-  // const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
-  const [, setActiveCard] = useState<CardProps | undefined>(undefined);
-
-  const userData = useAppSelector((state) => state[ActionTypes.USER].userData);
-  const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
-
-  function onOfferHover(hoveredCard: CardProps | undefined): void {
-    setActiveCard(hoveredCard);
-  }
+function FavoritesPage(): JSX.Element {
+  const favorites = useAppSelector((state) => state[ActionTypes.FAVORITES].favorites);
+  const isLoading = useAppSelector((state) => state[ActionTypes.FAVORITES].isFavoritesDataLoading);
 
   return (
-    <div className="page">
-      <PageHeader isAuthorized={isAuthorized} userData={userData} />
+    <div className={`page ${favorites.length === 0 ? 'page--favorites-empty' : null}`}>
+      <PageHeader />
 
-      <main className="page__main page__main--favorites">
+      <main className={`page__main page__main--favorites ${favorites.length === 0 ? 'page__main--favorites-empty' : null}`}>
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
+          <section className={`favorites ${favorites.length === 0 ? 'favorites--empty' : null}`}>
+            {((isLoading === LoadingStatus.Failure || isLoading === LoadingStatus.Success) && favorites.length === 0)
+              ?
+              <>
+                <h1 className="visually-hidden">Favorites (empty)</h1>
+                <div className="favorites__status-wrapper">
+                  <b className="favorites__status">Nothing yet saved.</b>
+                  <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
                 </div>
-                <div className="favorites__places">
-                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
-                </div>
-              </li>
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <OfferList listOfOffers={listOfOffers} onOfferHover={onOfferHover} />
-                </div>
-              </li>
-            </ul>
+              </>
+              :
+              <>
+                <h1 className="favorites__title">Saved listing</h1>
+                <OffersOnCities />
+              </>}
           </section>
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        <Link className="footer__logo-link" to={AppRoute.Main}>
+          <img className="footer__logo" src="/img/logo.svg" alt="6 cities logo" width="64" height="33" />
+        </Link>
       </footer>
     </div>
   );

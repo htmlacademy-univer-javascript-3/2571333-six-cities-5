@@ -13,7 +13,7 @@ type OffersState = {
 const initialState: OffersState = {
   offers: [],
   nearbyOffers: [],
-  isOffersDataLoading: LoadingStatus.Init,
+  isOffersDataLoading: LoadingStatus.Init
 };
 
 const offersReducer = createReducer(initialState, (builder) => {

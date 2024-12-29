@@ -11,6 +11,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import { setOffersLoadingStatus } from '../../store/actions';
 import { LoadingStatus } from '../../recources/LoadingStatus';
 import { ActionTypes } from '../../recources/ActionTypes';
+import MainEmpty from '../../components/MainEmpty/MainEmpty';
 
 function MainPage(): JSX.Element {
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
@@ -19,8 +20,6 @@ function MainPage(): JSX.Element {
   const currrentCity = useAppSelector((state) => state[ActionTypes.CITY].city);
   const currentOffers = useAppSelector((state) => state[ActionTypes.OFFERS].offers);
   const currentlyLoading = useAppSelector((state) => state[ActionTypes.OFFERS].isOffersDataLoading);
-  const userData = useAppSelector((state) => state[ActionTypes.USER].userData);
-  const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
 
   function onOfferHover(hoveredCard: CardProps | undefined): void {
     setActiveCard(hoveredCard);
@@ -58,15 +57,13 @@ function MainPage(): JSX.Element {
 
   const cityListMemo = useMemo(() => <CityList />, []);
 
-  const pageHeardMemo = useMemo(() => <PageHeader isAuthorized={isAuthorized} userData={userData} />, [isAuthorized, userData]);
-
   const placesSorterMemo = useMemo(() => <PlacesSorter currentSorting={currentSorting} onSortingChange={onSortingChange} />, [currentSorting]);
 
   const offerListMemo = useMemo(() => <OfferList listOfOffers={sortedOffers} onOfferHover={onOfferHover} />, [sortedOffers]);
 
   return (
     <div className="page page--gray page--main">
-      {pageHeardMemo}
+      <PageHeader />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -75,6 +72,9 @@ function MainPage(): JSX.Element {
             {cityListMemo}
           </section>
         </div>
+        {currentlyLoading === LoadingStatus.Failure ? 
+        <MainEmpty/>
+        : 
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -89,7 +89,7 @@ function MainPage(): JSX.Element {
               </section>
             </div>
           </div>
-        </div>
+        </div>}
       </main>
     </div>
   );

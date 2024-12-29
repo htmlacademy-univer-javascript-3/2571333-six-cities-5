@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import { LoadingStatus } from '../../recources/LoadingStatus';
 import { useParams } from 'react-router-dom';
 import { clearComments, clearNearbyOffers, clearOffer } from '../../store/actions';
-import { fetchComments, fetchOffersNearby, fetchOneOffer } from '../../store/actionsAPI';
+import { changeFavorite, fetchComments, fetchOffersNearby, fetchOneOffer } from '../../store/actionsAPI';
 import { ActionTypes } from '../../recources/ActionTypes';
 
 function OfferPage(): JSX.Element {
@@ -17,7 +17,6 @@ function OfferPage(): JSX.Element {
 
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);
 
-  const userData = useAppSelector((state) => state[ActionTypes.USER].userData);
   const isAuthorized = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   const offer = useAppSelector((state) => state[ActionTypes.OFFER].offer);
   const isLoadingOneOfferLocalUsage = useAppSelector((state) => state[ActionTypes.OFFER].isOfferDataLoading);
@@ -56,9 +55,20 @@ function OfferPage(): JSX.Element {
     };
   }, [UseAppDispatchLocalUsage, id, offer]);
 
+  function changeToFavorites(): void {
+    console.log(id + ': ' + offer?.isFavorite)
+    UseAppDispatchLocalUsage(changeFavorite(
+      {
+        offerId: String(id),
+        favoriteStatus: !offer?.isFavorite
+      }
+    ))
+    console.log(id + ': ' + offer?.isFavorite)
+  }
+
   return (
     <div className="page">
-      <PageHeader isAuthorized={isAuthorized} userData={userData} />
+      <PageHeader />
 
       <main className="page__main page__main--offer">
 
@@ -91,7 +101,7 @@ function OfferPage(): JSX.Element {
                     </h1>
                     {isAuthorized ?
                       (
-                        <button className="offer__bookmark-button button" type="button">
+                        <button className="offer__bookmark-button button" type="button" onClick={changeToFavorites}>
                           <svg className="offer__bookmark-icon" width="31" height="33">
                             <use xlinkHref="#icon-bookmark" />
                           </svg>
@@ -171,7 +181,7 @@ function OfferPage(): JSX.Element {
               ) : (
                 <section className="near-places places">
                   <h2 className="near-places__title">Other places in the neighbourhood</h2>
-                  <OfferList listOfOffers={nearbyOffers} onOfferHover={onOfferHover} isNearPlaces />
+                  <OfferList listOfOffers={nearbyOffers} onOfferHover={onOfferHover} offerPageId={String(offer.id)} isNearPlaces />
                 </section>
               )}
             </div>

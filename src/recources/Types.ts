@@ -12,6 +12,7 @@ export type CardProps = {
   location: MapCoordinates;
   city: City;
   isNearPlaces?: boolean;
+  onFavoriteClick?: (id: string, isFavorite: boolean) => void;
 }
 
 export type User = {

@@ -26,3 +26,6 @@ export const setLoadingOfferComments = createAction<LoadingStatus>(`${ActionType
 export const setNearbyOffers = createAction<CardProps[]>(`${ActionTypes.OFFERS}/nearby`);
 export const clearNearbyOffers = createAction(`${ActionTypes.OFFERS}/clearNearby`);
 export const setLoadingNerbyOffers = createAction<LoadingStatus>(`${ActionTypes.OFFERS}/loading`);
+
+export const setFavorites = createAction<CardProps[]>(`${ActionTypes.FAVORITES}/fill`);
+export const setFavoritesLoadingStatus = createAction<LoadingStatus>(`${ActionTypes.FAVORITES}/loading`);
