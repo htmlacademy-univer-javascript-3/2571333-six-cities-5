@@ -1,9 +1,9 @@
 import {createAction} from '@reduxjs/toolkit';
-import { City } from '../components/Map/Map';
-import { CardProps, FullOfferInfo, UserData } from '../recources/Types';
-import { ActionTypes } from '../recources/ActionTypes';
-import { LoadingStatus } from '../recources/LoadingStatus';
-import { ReviewProps } from '../components/Review/Review';
+import { City } from '../components/map/map';
+import { CardProps, FullOfferInfo, UserData } from '../recources/types';
+import { ActionTypes } from '../recources/action-types';
+import { LoadingStatus } from '../recources/loading-status';
+import { ReviewProps } from '../components/review/review';
 
 export const changeCity = createAction<City>(`${ActionTypes.CITY}/change`);
 export const setAuthorizationStatus = createAction<boolean>(`${ActionTypes.USER}/authorization`);
