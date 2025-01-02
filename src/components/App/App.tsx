@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../recources/Routes.ts';
-import PrivateRoute from '../PrivateRoute/PrivateRoute.tsx';
+import { AppRoute } from '../../recources/routes.ts';
+import PrivateRoute from '../private-route/private-route.tsx';
 
-import MainPage from '../../pages/MainPage/MainPage.tsx';
-import LoginPage from '../../pages/LoginPage/LoginPage.tsx';
-import OfferPage from '../../pages/OfferPage/OfferPage.tsx';
-import FavoritesPage from '../../pages/FavoritesPage/FavoritesPage.tsx';
-import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.tsx';
-import { useAppSelector } from '../../hooks/useAppSelector.ts';
-import { ActionTypes } from '../../recources/ActionTypes.ts';
+import MainPage from '../../pages/main-page/main-page.tsx';
+import LoginPage from '../../pages/login-page/login-page.tsx';
+import OfferPage from '../../pages/offer-page/offer-page.tsx';
+import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
+import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
+import { useAppSelector } from '../../hooks/use-app-selector.ts';
+import { ActionTypes } from '../../recources/action-types.ts';
 
 
 function App(): JSX.Element {

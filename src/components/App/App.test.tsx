@@ -1,11 +1,11 @@
 import { render, screen} from '@testing-library/react';
 import { MemoryHistory, createMemoryHistory } from 'history';
-import App from './App.tsx';
-import { AppRoute } from '../../recources/Routes.ts';
-import { withHistory, withStore } from '../../recources/MockComponent.tsx';
-import { makeFakeStore } from '../../recources/Mock.ts';
-import { CITIES } from '../../recources/Cities.ts';
-import { LoadingStatus } from '../../recources/LoadingStatus.ts';
+import App from './app.tsx';
+import { AppRoute } from '../../recources/routes.ts';
+import { withHistory, withStore } from '../../recources/mock-component.tsx';
+import { makeFakeStore } from '../../recources/mock.ts';
+import { CITIES } from '../../recources/cities.ts';
+import { LoadingStatus } from '../../recources/loading-status.ts';
 
 describe('Application Routing', () => {
   let mockHistory: MemoryHistory;

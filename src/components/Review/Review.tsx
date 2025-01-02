@@ -1,5 +1,5 @@
-import { User } from '../../recources/Types';
-import { parseDateNumber, parseDateWord } from './DateParsers';
+import { User } from '../../recources/types';
+import { parseDateNumber, parseDateWord } from './date-parsers';
 
 export type ReviewProps = {
   id: number;

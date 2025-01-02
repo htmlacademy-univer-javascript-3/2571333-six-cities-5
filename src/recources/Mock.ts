@@ -1,13 +1,13 @@
 import { Action } from 'redux';
 import { FullState } from '../store/reducer';
-import { CITIES } from './Cities';
-import { UserState } from '../store/reducers/userReducer';
-import { OffersState } from '../store/reducers/offersReducer';
-import { LoadingStatus } from './LoadingStatus';
-import { OfferState } from '../store/reducers/offerReducer';
-import { FavoritesState } from '../store/reducers/favoritesReducer';
-import { CommentsState } from '../store/reducers/commentsReducer';
-import { CityState } from '../store/reducers/cityReducer';
+import { CITIES } from './cities';
+import { UserState } from '../store/reducers/user-reducer';
+import { OffersState } from '../store/reducers/offers-reducer';
+import { LoadingStatus } from './loading-status';
+import { OfferState } from '../store/reducers/offer-reducer';
+import { FavoritesState } from '../store/reducers/favorites-reducer';
+import { CommentsState } from '../store/reducers/comments-reducer';
+import { CityState } from '../store/reducers/city-reducer';
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
 
