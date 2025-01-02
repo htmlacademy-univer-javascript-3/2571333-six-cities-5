@@ -1,13 +1,15 @@
 import { User } from '../../recources/Types';
+import { parseDateNumber, parseDateWord } from './DateParsers';
 
 export type ReviewProps = {
-    id: number;
-    user: User;
-    rating: number;
-    comment: string;
+  id: number;
+  user: User;
+  rating: number;
+  comment: string;
+  date: string;
 }
 
-function Review({ id, user, rating, comment }: ReviewProps): JSX.Element {
+function Review({ id, user, rating, comment, date }: ReviewProps): JSX.Element {
   return (
     <li id={id.toString()} className="reviews__item">
       <div className="reviews__user user">
@@ -28,7 +30,7 @@ function Review({ id, user, rating, comment }: ReviewProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={parseDateNumber(new Date(date))}>{parseDateWord(new Date(date))}</time>
       </div>
     </li>
   );

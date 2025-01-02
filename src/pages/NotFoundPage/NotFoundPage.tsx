@@ -13,7 +13,6 @@ function NotFoundPage(): JSX.Element {
         <button>
           <Link to={AppRoute.Main}>Try going there</Link>
         </button>
-
       </div>
     </div>
   );

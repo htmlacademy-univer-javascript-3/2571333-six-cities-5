@@ -5,7 +5,7 @@ import { userReducer } from './reducers/userReducer';
 import { offersReducer } from './reducers/offersReducer';
 import { offerReducer } from './reducers/offerReducer';
 import { commentsReducer } from './reducers/commentsReducer';
-import { favoritesReducer } from './reducers/favoriteReducer';
+import { favoritesReducer } from './reducers/favoritesReducer';
 
 const reducer = combineReducers({
   [ActionTypes.USER]: userReducer,

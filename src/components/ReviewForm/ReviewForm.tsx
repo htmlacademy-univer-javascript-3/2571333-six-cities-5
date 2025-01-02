@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export type ReviewFormState = {
   comment: string;
-  numberOfStars: number;
+  rating: number;
 }
 
 function ReviewForm(): JSX.Element {
@@ -18,7 +18,7 @@ function ReviewForm(): JSX.Element {
 
     if (savedReview !== null) {
       tempComment = savedReview.comment;
-      tempNumberOfStars = savedReview.numberOfStars;
+      tempNumberOfStars = savedReview.rating;
     }
     if (name === 'rating') {
       tempNumberOfStars = Number(value);
@@ -30,7 +30,7 @@ function ReviewForm(): JSX.Element {
     if (tempComment === '' && tempNumberOfStars === 0) {
       setSavedReview(null);
     } else {
-      setSavedReview({ comment: tempComment, numberOfStars: tempNumberOfStars });
+      setSavedReview({ comment: tempComment, rating: tempNumberOfStars });
     }
   }
 
@@ -58,7 +58,7 @@ function ReviewForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={savedReview === null || savedReview !== null && savedReview?.comment.length < 50 || savedReview?.numberOfStars === 0}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={savedReview === null || savedReview !== null && savedReview?.comment.length < 50 || savedReview?.rating === 0}>Submit</button>
       </div>
     </form>
   );

@@ -73,7 +73,7 @@ function MainPage(): JSX.Element {
           </section>
         </div>
         {currentlyLoading === LoadingStatus.Failure ?
-          <MainEmpty/>
+          <MainEmpty city={currrentCity}/>
           :
           <div className="cities">
             <div className="cities__places-container container">

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../recources/Routes.ts';
 import PrivateRoute from '../PrivateRoute/PrivateRoute.tsx';
 
@@ -14,20 +14,18 @@ import { ActionTypes } from '../../recources/ActionTypes.ts';
 function App(): JSX.Element {
   const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Main} element={<MainPage/>} />
-        <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route path={AppRoute.Offer} element={<OfferPage />} />
-        <Route path={AppRoute.Favorites} element={
-          <PrivateRoute isAuthorized={isAuth}>
-            <FavoritesPage />
-          </PrivateRoute>
-        }
-        />
-        <Route path={'*'} element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path={AppRoute.Main} element={<MainPage/>} />
+      <Route path={AppRoute.Login} element={<LoginPage />} />
+      <Route path={AppRoute.Offer} element={<OfferPage />} />
+      <Route path={AppRoute.Favorites} element={
+        <PrivateRoute isAuthorized={isAuth}>
+          <FavoritesPage />
+        </PrivateRoute>
+      }
+      />
+      <Route path={'*'} element={<NotFoundPage />} />
+    </Routes>
   );
 }
 

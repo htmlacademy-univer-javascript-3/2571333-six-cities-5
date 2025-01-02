@@ -9,7 +9,8 @@
     "fix": "eslint src --ext ts,tsx --fix",
     "preview": "vite preview",
     "test": "vitest --passWithNoTests",
-    "check": "npm run build && npm run fix"
+    "teststop": "vitest --passWithNoTests --run",
+    "check": "npm run build && npm run teststop && npm run fix"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.9.7",

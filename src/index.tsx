@@ -4,6 +4,7 @@ import App from './components/App/App';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { fetchOffers, userCheckAuth } from './store/actionsAPI';
+import { BrowserRouter } from 'react-router-dom';
 
 store.dispatch(fetchOffers());
 store.dispatch(userCheckAuth());
@@ -15,7 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
