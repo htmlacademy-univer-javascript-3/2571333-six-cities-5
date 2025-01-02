@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Review, { ReviewProps } from './review';
 import * as dateUtils from './date-parsers';
 
-vi.mock('./DateParsers', () => ({
+vi.mock('./date-parsers', () => ({
   parseDateNumber: vi.fn(),
   parseDateWord: vi.fn(),
 }));
