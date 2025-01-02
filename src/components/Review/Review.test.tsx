@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import Review, { ReviewProps } from './Review';
-import * as dateUtils from './DateParsers';
+import Review, { ReviewProps } from './review';
+import * as dateUtils from './date-parsers';
 
 vi.mock('./DateParsers', () => ({
   parseDateNumber: vi.fn(),

@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import { Icon, layerGroup, Marker } from 'leaflet';
-import { CardProps } from '../../recources/Types';
+import { CardProps } from '../../recources/types';
 
 export type MapCoordinates = {
   latitude: number;

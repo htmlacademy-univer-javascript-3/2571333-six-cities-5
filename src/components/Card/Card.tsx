@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { CardProps } from '../../recources/Types';
+import { CardProps } from '../../recources/types';
 import classNames from 'classnames';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { ActionTypes } from '../../recources/ActionTypes';
-import { AppRoute } from '../../recources/Routes';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { ActionTypes } from '../../recources/action-types';
+import { AppRoute } from '../../recources/routes';
 import { useMemo } from 'react';
 
 function Card({ id, title, type, previewImage, price, rating, isPremium, isFavorite, isNearPlaces, onFavoriteClick }: CardProps): JSX.Element {

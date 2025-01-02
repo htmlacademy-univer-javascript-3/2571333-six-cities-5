@@ -5,12 +5,12 @@ import { createAPI } from '../api';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
-import { State } from '../hooks/useAppSelector.ts';
+import { State } from '../hooks/use-app-selector.ts';
 import { Action } from '@reduxjs/toolkit';
-import { ActionTypes } from '../recources/ActionTypes.ts';
-import App from '../components/App/App.tsx';
-import { LoadingStatus } from '../recources/LoadingStatus.ts';
-import { AppRoute } from '../recources/Routes.ts';
+import { ActionTypes } from '../recources/action-types.ts';
+import App from '../components/App/app.tsx';
+import { LoadingStatus } from '../recources/loading-status.ts';
+import { AppRoute } from '../recources/routes.ts';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 const initActionsStore = () => {

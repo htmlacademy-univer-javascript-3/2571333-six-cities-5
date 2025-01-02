@@ -1,15 +1,15 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authData, CardProps, FullOfferInfo, UserData } from '../recources/Types.ts';
+import { authData, CardProps, FullOfferInfo, UserData } from '../recources/types.ts';
 import { clearUserData, fillOffers, setAuthorizationStatus, setComments, setFavorites, setFavoritesLoadingStatus, setLoadingOfferComments, setLoadingOneOfferStatus, setNearbyOffers, setOffer, setOffersLoadingStatus, setUserData } from './actions.ts';
-import { APIRoutes } from '../recources/APIRoutes.ts';
-import { ActionTypes } from '../recources/ActionTypes.ts';
-import { AppDispatch, State } from '../hooks/useAppSelector.ts';
+import { APIRoutes } from '../recources/api-routes.ts';
+import { ActionTypes } from '../recources/action-types.ts';
+import { AppDispatch, State } from '../hooks/use-app-selector.ts';
 import { StatusCodes } from 'http-status-codes';
 import { dropToken, saveToken } from '../api.ts';
-import { LoadingStatus } from '../recources/LoadingStatus.ts';
-import { ReviewProps } from '../components/Review/Review.tsx';
-import { ReviewFormState } from '../components/ReviewForm/ReviewForm.tsx';
+import { LoadingStatus } from '../recources/loading-status.ts';
+import { ReviewProps } from '../components/Review/review.tsx';
+import { ReviewFormState } from '../components/ReviewForm/review-form.tsx';
 
 export const userLogin = createAsyncThunk<void, authData, {
   dispatch: AppDispatch;

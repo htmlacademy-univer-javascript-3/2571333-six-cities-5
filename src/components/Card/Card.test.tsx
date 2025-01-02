@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { withHistory, withStore } from '../../recources/MockComponent';
-import { makeFakeStore } from '../../recources/Mock';
-import Card from './Card';
-import { CITIES } from '../../recources/Cities';
+import { withHistory, withStore } from '../../recources/mock-component';
+import { makeFakeStore } from '../../recources/mock';
+import Card from './card';
+import { CITIES } from '../../recources/cities';
 
 describe('Card tests', () => {
   let mockHistory: MemoryHistory;
