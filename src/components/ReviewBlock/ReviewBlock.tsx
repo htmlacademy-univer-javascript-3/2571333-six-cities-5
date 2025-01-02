@@ -17,7 +17,7 @@ function ReviewBlock({ numberOfReviews, postedReviews }: ReviewBlockProps): JSX.
       <ul className="reviews__list">
         {
           postedReviews.map((review) => (
-            <Review key={review.id} id={review.id} user={review.user} rating={review.rating} comment={review.comment} />
+            <Review key={review.id} id={review.id} user={review.user} rating={review.rating} comment={review.comment} date={review.date} />
           ))
         }
       </ul>

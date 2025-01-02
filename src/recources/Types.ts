@@ -16,8 +16,10 @@ export type CardProps = {
 }
 
 export type User = {
+  id: number;
   name: string;
   avatarUrl: string;
+  isPro: boolean;
 }
 
 export type authData = {
@@ -30,15 +32,11 @@ export type UserData = User & {
   token: string;
 }
 
-export type HostUser = User & {
-  isPro: boolean;
-}
-
 export type FullOfferInfo = CardProps & {
   description: string;
   bedrooms: number;
   goods: string[];
-  host: HostUser;
+  host: User;
   images: string[];
   maxAdults: number;
 };

@@ -14,7 +14,6 @@ import { ActionTypes } from '../../recources/ActionTypes.ts';
 function App(): JSX.Element {
   const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
-    <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={<MainPage/>} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
@@ -27,7 +26,6 @@ function App(): JSX.Element {
         />
         <Route path={'*'} element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 
