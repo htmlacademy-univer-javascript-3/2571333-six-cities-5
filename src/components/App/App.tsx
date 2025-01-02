@@ -14,18 +14,18 @@ import { ActionTypes } from '../../recources/ActionTypes.ts';
 function App(): JSX.Element {
   const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
-      <Routes>
-        <Route path={AppRoute.Main} element={<MainPage/>} />
-        <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route path={AppRoute.Offer} element={<OfferPage />} />
-        <Route path={AppRoute.Favorites} element={
-          <PrivateRoute isAuthorized={isAuth}>
-            <FavoritesPage />
-          </PrivateRoute>
-        }
-        />
-        <Route path={'*'} element={<NotFoundPage />} />
-      </Routes>
+    <Routes>
+      <Route path={AppRoute.Main} element={<MainPage/>} />
+      <Route path={AppRoute.Login} element={<LoginPage />} />
+      <Route path={AppRoute.Offer} element={<OfferPage />} />
+      <Route path={AppRoute.Favorites} element={
+        <PrivateRoute isAuthorized={isAuth}>
+          <FavoritesPage />
+        </PrivateRoute>
+      }
+      />
+      <Route path={'*'} element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
