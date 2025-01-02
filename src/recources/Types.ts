@@ -1,4 +1,4 @@
-import { City, MapCoordinates } from '../components/Map/map';
+import { City, MapCoordinates } from '../components/map/map';
 
 export type CardProps = {
   id: number;

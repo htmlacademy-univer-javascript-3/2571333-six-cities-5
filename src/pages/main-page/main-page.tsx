@@ -1,17 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
-import OfferList from '../../components/OfferList/offer-list';
-import Map from '../../components/Map/map';
+import OfferList from '../../components/offer-list/offer-list';
+import Map from '../../components/map/map';
 import { CardProps } from '../../recources/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { CityList } from '../../components/CityList/city-list';
-import PlacesSorter from '../../components/PlacesSorter/places-sorter';
+import { CityList } from '../../components/city-list/city-list';
+import PlacesSorter from '../../components/places-sorter/places-sorter';
 import { SortOptions } from '../../recources/sort-options';
-import PageHeader from '../../components/PageHeader/page-header';
+import PageHeader from '../../components/page-header/page-header';
 import { setOffersLoadingStatus } from '../../store/actions';
 import { LoadingStatus } from '../../recources/loading-status';
 import { ActionTypes } from '../../recources/action-types';
-import MainEmpty from '../../components/MainEmpty/main-empty';
-import Spinner from '../../components/Spinner/spinner';
+import MainEmpty from '../../components/main-empty/main-empty';
+import Spinner from '../../components/spinner/spinner';
 
 function MainPage(): JSX.Element {
   const [activeCard, setActiveCard] = useState<CardProps | undefined>(undefined);

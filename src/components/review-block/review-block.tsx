@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { ActionTypes } from '../../recources/action-types';
-import Review, { ReviewProps } from '../Review/review';
-import ReviewForm from '../ReviewForm/review-form';
+import Review, { ReviewProps } from '../review/review';
+import ReviewForm from '../review-form/review-form';
 
 export type ReviewBlockProps = {
   numberOfReviews: number;

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../recources/routes.ts';
-import PageHeader from '../../components/PageHeader/page-header.tsx';
+import PageHeader from '../../components/page-header/page-header.tsx';
 
 function NotFoundPage(): JSX.Element {
 

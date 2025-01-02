@@ -1,5 +1,5 @@
 import { FormEventHandler, useEffect } from 'react';
-import HeaderPic from '../../components/PageHeader/header-pic';
+import HeaderPic from '../../components/page-header/header-pic';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { userLogin } from '../../store/actionsAPI';
 import { authData } from '../../recources/types';

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { useRef } from 'react';
 
 import useMap from './use-map.tsx';
-import { City } from '../components/Map/map.tsx';
+import { City } from '../components/map/map.tsx';
 import { CITIES } from '../recources/cities.ts';
 
 const TestComponent = (city: City) => {

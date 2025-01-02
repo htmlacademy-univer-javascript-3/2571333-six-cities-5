@@ -1,4 +1,4 @@
-import { City } from '../Map/map';
+import { City } from '../map/map';
 
 type MainEmptyProps = {
   city: City;

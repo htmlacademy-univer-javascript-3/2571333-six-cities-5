@@ -8,8 +8,8 @@ import { AppDispatch, State } from '../hooks/use-app-selector.ts';
 import { StatusCodes } from 'http-status-codes';
 import { dropToken, saveToken } from '../api.ts';
 import { LoadingStatus } from '../recources/loading-status.ts';
-import { ReviewProps } from '../components/Review/review.tsx';
-import { ReviewFormState } from '../components/ReviewForm/review-form.tsx';
+import { ReviewProps } from '../components/review/review.tsx';
+import { ReviewFormState } from '../components/review-form/review-form.tsx';
 
 export const userLogin = createAsyncThunk<void, authData, {
   dispatch: AppDispatch;

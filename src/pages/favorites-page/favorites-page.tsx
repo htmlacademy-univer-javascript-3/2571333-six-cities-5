@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import OffersOnCities from '../../components/OffersOnCities/offers-on-cities';
-import PageHeader from '../../components/PageHeader/page-header';
+import OffersOnCities from '../../components/offers-on-cities/offers-on-cities';
+import PageHeader from '../../components/page-header/page-header';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { ActionTypes } from '../../recources/action-types';
 import { LoadingStatus } from '../../recources/loading-status';

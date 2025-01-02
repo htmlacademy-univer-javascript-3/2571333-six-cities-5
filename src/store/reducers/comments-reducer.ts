@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { ReviewProps } from '../../components/Review/review';
+import { ReviewProps } from '../../components/review/review';
 import { LoadingStatus } from '../../recources/loading-status';
 import { clearComments, setComments, setLoadingOfferComments } from '../actions';
 

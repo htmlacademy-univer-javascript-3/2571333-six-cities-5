@@ -1,4 +1,4 @@
-import { ReviewProps } from '../../../components/Review/review';
+import { ReviewProps } from '../../../components/review/review';
 import { LoadingStatus } from '../../../recources/loading-status';
 import { clearComments, setComments, setLoadingOfferComments } from '../../actions';
 import { commentsReducer } from '../comments-reducer';

@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../recources/routes.ts';
-import PrivateRoute from '../PrivateRoute/private-route.tsx';
+import PrivateRoute from '../private-route/private-route.tsx';
 
-import MainPage from '../../pages/MainPage/main-page.tsx';
-import LoginPage from '../../pages/LoginPage/login-page.tsx';
-import OfferPage from '../../pages/OfferPage/offer-page.tsx';
-import FavoritesPage from '../../pages/FavoritesPage/favorites-page.tsx';
-import NotFoundPage from '../../pages/NotFoundPage/not-found-page.tsx';
+import MainPage from '../../pages/main-page/main-page.tsx';
+import LoginPage from '../../pages/login-page/login-page.tsx';
+import OfferPage from '../../pages/offer-page/offer-page.tsx';
+import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
+import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 import { useAppSelector } from '../../hooks/use-app-selector.ts';
 import { ActionTypes } from '../../recources/action-types.ts';
 
 
-function app(): JSX.Element {
+function App(): JSX.Element {
   const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
     <Routes>
@@ -34,4 +34,4 @@ function app(): JSX.Element {
   );
 }
 
-export default app;
+export default App;

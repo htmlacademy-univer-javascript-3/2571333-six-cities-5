@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import OfferList from '../../components/OfferList/offer-list';
-import ReviewBlock from '../../components/ReviewBlock/review-block';
+import OfferList from '../../components/offer-list/offer-list';
+import ReviewBlock from '../../components/review-block/review-block';
 import { CardProps } from '../../recources/types';
-import Map from '../../components/Map/map';
-import PageHeader from '../../components/PageHeader/page-header';
+import Map from '../../components/map/map';
+import PageHeader from '../../components/page-header/page-header';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import Spinner from '../../components/Spinner/spinner';
+import Spinner from '../../components/spinner/spinner';
 import { LoadingStatus } from '../../recources/loading-status';
 import { useParams } from 'react-router-dom';
 import { clearComments, clearNearbyOffers, clearOffer } from '../../store/actions';

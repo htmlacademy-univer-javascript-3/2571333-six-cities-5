@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { ActionTypes } from '../../recources/action-types';
 import { CardProps } from '../../recources/types';
-import Card from '../Card/card';
+import Card from '../card/card';
 import { changeFavorite } from '../../store/actionsAPI';
 
 function OffersOnCities(): JSX.Element {

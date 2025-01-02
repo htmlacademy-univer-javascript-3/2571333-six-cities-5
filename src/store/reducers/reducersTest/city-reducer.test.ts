@@ -1,4 +1,4 @@
-import { City } from '../../../components/Map/map';
+import { City } from '../../../components/map/map';
 import { CITIES } from '../../../recources/cities';
 import { changeCity } from '../../actions';
 import { cityReducer } from '../city-reducer';

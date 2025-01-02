@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { CardProps } from '../../recources/types';
 import { useAppDispatch } from '../../hooks/use-app-selector';
 import { changeFavorite } from '../../store/actionsAPI';
-import Card from '../Card/card';
+import Card from '../card/card';
 
 
 export type OfferListProps = {
