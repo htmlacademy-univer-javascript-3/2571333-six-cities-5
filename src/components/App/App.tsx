@@ -11,7 +11,7 @@ import { useAppSelector } from '../../hooks/use-app-selector.ts';
 import { ActionTypes } from '../../recources/action-types.ts';
 
 
-function App(): JSX.Element {
+function app(): JSX.Element {
   const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
     <Routes>
@@ -34,4 +34,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+export default app;
