@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import MockAdapter from 'axios-mock-adapter';
-import { HistoryRouter } from '../components/HistoryRouter/history-router';
+import { HistoryRouter } from '../components/history-router/history-router';
 import { createAPI } from '../api';
 import { AppThunkDispatch } from '../store/storeTests/actions-api.test';
 import { FullState } from '../store/reducer';
