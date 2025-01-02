@@ -56,9 +56,15 @@ function ReviewForm(): JSX.Element {
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={SaveReviewState} />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b> and <b>no more then 300 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={savedReview === null || savedReview !== null && savedReview?.comment.length < 50 || savedReview?.rating === 0}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={
+          savedReview === null ||
+          savedReview !== null && (savedReview?.comment.length < 50 || savedReview?.comment.length > 300) ||
+          savedReview?.rating === 0
+        }
+        >Submit
+        </button>
       </div>
     </form>
   );

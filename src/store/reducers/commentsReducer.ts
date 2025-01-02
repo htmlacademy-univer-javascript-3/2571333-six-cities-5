@@ -3,7 +3,7 @@ import { ReviewProps } from '../../components/Review/Review';
 import { LoadingStatus } from '../../recources/LoadingStatus';
 import { clearComments, setComments, setLoadingOfferComments } from '../actions';
 
-type CommentsState = {
+export type CommentsState = {
   comments: ReviewProps[];
   isCommentsDataLoading: LoadingStatus;
 };

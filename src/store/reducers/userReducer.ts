@@ -3,7 +3,7 @@ import { UserData } from '../../recources/Types';
 import { clearUserData, setAuthorizationStatus, setUserData } from '../actions';
 
 
-type UserState = {
+export type UserState = {
   authorizationStatus: boolean;
   userData: UserData | null;
 };

@@ -4,7 +4,7 @@ import { CITIES } from '../../recources/Cities';
 import { changeCity } from '../actions';
 
 
-type CityState = {
+export type CityState = {
   city: City;
 };
 

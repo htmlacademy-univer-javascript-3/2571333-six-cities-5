@@ -5,7 +5,7 @@ import { CardProps } from '../../recources/Types';
 import { LoadingStatus } from '../../recources/LoadingStatus';
 
 
-type FavoritesState = {
+export type FavoritesState = {
   favorites: CardProps[];
   isFavoritesDataLoading: LoadingStatus;
 };
