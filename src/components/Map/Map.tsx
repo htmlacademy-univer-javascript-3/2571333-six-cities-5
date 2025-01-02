@@ -66,7 +66,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, points, selectedPoint, city]);
 
-  return <div style={{ height: '100%' }} ref={mapRef}></div>;
+  return <div style={{ height: '100%' }} ref={mapRef} className='mapContainer'></div>;
 }
 
 export default Map;

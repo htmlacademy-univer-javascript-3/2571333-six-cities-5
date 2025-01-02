@@ -7,6 +7,8 @@ import { offerReducer } from './reducers/offerReducer';
 import { commentsReducer } from './reducers/commentsReducer';
 import { favoritesReducer } from './reducers/favoritesReducer';
 
+export type FullState = ReturnType<typeof reducer>;
+
 const reducer = combineReducers({
   [ActionTypes.USER]: userReducer,
   [ActionTypes.CITY]: cityReducer,

@@ -4,7 +4,7 @@ import { LoadingStatus } from '../../recources/LoadingStatus';
 import { clearOffer, setActiveOffer, setLoadingOneOfferStatus, setOffer } from '../actions';
 
 
-type OfferState = {
+export type OfferState = {
   offer?: FullOfferInfo;
   isOfferDataLoading: LoadingStatus;
   activeOffer?: string;

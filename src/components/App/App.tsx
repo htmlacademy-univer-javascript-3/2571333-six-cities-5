@@ -15,11 +15,16 @@ function App(): JSX.Element {
   const isAuth = useAppSelector((state) => state[ActionTypes.USER].authorizationStatus);
   return (
     <Routes>
-      <Route path={AppRoute.Main} element={<MainPage/>} />
-      <Route path={AppRoute.Login} element={<LoginPage />} />
+      <Route path={AppRoute.Main} element={<MainPage />} />
+      <Route path={AppRoute.Login} element={
+        <PrivateRoute isAuthorized={isAuth} hasToBeAuthorized={false}>
+          <LoginPage />
+        </PrivateRoute>
+      }
+      />
       <Route path={AppRoute.Offer} element={<OfferPage />} />
       <Route path={AppRoute.Favorites} element={
-        <PrivateRoute isAuthorized={isAuth}>
+        <PrivateRoute isAuthorized={isAuth} hasToBeAuthorized>
           <FavoritesPage />
         </PrivateRoute>
       }

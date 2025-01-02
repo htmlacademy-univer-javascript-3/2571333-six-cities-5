@@ -4,7 +4,7 @@ import { LoadingStatus } from '../../recources/LoadingStatus';
 import { clearNearbyOffers, fillOffers, setNearbyOffers, setOffersLoadingStatus } from '../actions';
 
 
-type OffersState = {
+export type OffersState = {
   offers: CardProps[];
   nearbyOffers: CardProps[];
   isOffersDataLoading: LoadingStatus;
